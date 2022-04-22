@@ -21,7 +21,7 @@ cesty = [
     (body[16], body[10]), (body[18], body[12]), #C, D
     (body[22], body[16]), (body[23], body[16]), (body[23], body[17], body[18]), (body[25], body[18]), (body[26], body[12]), #E, F, G, H, R
     (body[30], body[23]), (body[30], body[31], body[25]), (body[32], body[25]), (body[32], body[26]), #I, J, K, L
-    (body[36], body[22]), (body[36], body[30]), (body[36], body[38], (body[38], body[32]), (body[38], body[39], body[33], body[26])) #M, N, O, P, Q
+    (body[36], body[22]), (body[36], body[30]), (body[36], body[38]), (body[38], body[32]), (body[38], body[39], body[33], body[26]) #M, N, O, P, Q
         ]
 
 mapa = {"body":body,"vyhybky":vyhybky,"cesty":cesty}
