@@ -9,11 +9,11 @@ body = [
         ]
 
 vyhybky = [
-    {"pozice":body[10],"stav":False ,"hrac":"s"},
-    {"pozice":body[16],"stav":False ,"hrac":"s"}, {"pozice":body[18],"stav":False ,"hrac":"s"},
-    {"pozice":body[22],"stav":False ,"hrac":"j"}, {"pozice":body[23],"stav":False ,"hrac":"j"}, {"pozice":body[25],"stav":False ,"hrac":"s"}, {"pozice":body[26],"stav":False ,"hrac":"s"},
-    {"pozice":body[30],"stav":False ,"hrac":"j"}, {"pozice":body[32],"stav":False ,"hrac":"j"},
-    {"pozice":body[38],"stav":False ,"hrac":"j"},
+    {"pozice":body[10],"stav":False,"hrac":"s","rozcesti":("Z","JZ")},
+    {"pozice":body[16],"stav":False,"hrac":"s","rozcesti":("JZ","J")}, {"pozice":body[18],"stav":False ,"hrac":"s","rozcesti":("Z","J")},
+    {"pozice":body[22],"stav":False,"hrac":"j","rozcesti":("S","SV")}, {"pozice":body[23],"stav":False ,"hrac":"j","rozcesti":("S","SV")}, {"pozice":body[25],"stav":False ,"hrac":"s","rozcesti":("JZ","J")}, {"pozice":body[26],"stav":False ,"hrac":"s","rozcesti":("JZ","J")},
+    {"pozice":body[30],"stav":False,"hrac":"j","rozcesti":("S","V")}, {"pozice":body[32],"stav":False ,"hrac":"j","rozcesti":("S","SV")},
+    {"pozice":body[38],"stav":False,"hrac":"j","rozcesti":("SV","V")},
           ]
 
 cesty = [
