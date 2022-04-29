@@ -19,12 +19,12 @@ bod2_y = random.randint(0,ROZLISENI_Y)
 bod2_x = random.randint(0, ROZLISENI_X)
 
 #bod 3
-bod3_x = 0 
-bod3_y = ROZLISENI_Y - ROZLISENI_Y/3
+bod3_x = 100
+bod3_y = 100
 
 #bod 4
-bod4_x = 300
-bod4_y = ROZLISENI_Y
+bod4_x = ROZLISENI_X - 100
+bod4_y = ROZLISENI_Y -100
 
 bod3_x, bod4_x = min(bod3_x, bod4_x), max(bod3_x, bod4_x)
 bod3_y, bod4_y = min(bod3_y, bod4_y), max(bod3_y, bod4_y)
