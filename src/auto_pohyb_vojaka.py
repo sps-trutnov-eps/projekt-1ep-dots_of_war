@@ -5,6 +5,10 @@ import math
 
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1800,900
 BARVA_POZADI = 255,255,255
+cas = pygame.time.Clock()
+bod_v_case = pygame.time.get_ticks()
+
+
 
 #Bod 1
 bod1_y = random.randint(0,ROZLISENI_Y)
@@ -22,10 +26,10 @@ bod1_y, bod2_y = min(bod1_y, bod2_y), max(bod1_y, bod2_y)
 a = math.atan2(bod2_y - bod1_y,bod2_x - bod1_x)
 
 
-k = 100
+pocatecni_pocet_vojaku = 100
 seznam_vojaku = []
 
-for nabor in range(k):
+for nabor in range(pocatecni_pocet_vojaku):
     vojak = (random.randint(bod1_x, bod2_x), random.randint(bod1_y, bod2_y))
     seznam_vojaku.append(vojak)
 
@@ -41,15 +45,19 @@ while True:
         if u.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if u.type == pygame.MOUSEWHEEL:
-            if u.y < 0:
-                pygame.display.iconify()
-    if x < bod2_x and bod2_x > bod1_x:
-        x += 0.5 * math.cos(a)
-        y += 0.5 * math.sin(a)
-    if x > bod2_x and bod2_x < bod1_x:
-        x += 0.5 * math.cos(a)
-        y += 0.5 * math.sin(a)
+    cas_ted = pygame.time.get_ticks()
+    od_minula_ms = cas_ted - bod_v_case
+    
+    if od_minula_ms > 1000:
+        vojak = (random.randint(bod1_x, bod2_x), random.randint(bod1_y, bod2_y))
+        seznam_vojaku.append(vojak)
+        
+        
+        
+        bod_v_case = cas_ted 
+    
+   
+    
             
     okno.fill(BARVA_POZADI)
     
