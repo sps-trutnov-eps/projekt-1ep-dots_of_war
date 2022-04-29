@@ -18,10 +18,18 @@ bod1_x = random.randint(0,ROZLISENI_X)
 bod2_y = random.randint(0,ROZLISENI_Y)
 bod2_x = random.randint(0, ROZLISENI_X)
 
-bod1_x, bod2_x = min(bod1_x, bod2_x), max(bod1_x, bod2_x)
-bod1_y, bod2_y = min(bod1_y, bod2_y), max(bod1_y, bod2_y)
+#bod 3
+bod3_x = 0 
+bod3_y = ROZLISENI_Y - ROZLISENI_Y/3
 
-#Bod 3
+#bod 4
+bod4_x = 300
+bod4_y = ROZLISENI_Y
+
+bod3_x, bod4_x = min(bod3_x, bod4_x), max(bod3_x, bod4_x)
+bod3_y, bod4_y = min(bod3_y, bod4_y), max(bod3_y, bod4_y)
+
+
 
 a = math.atan2(bod2_y - bod1_y,bod2_x - bod1_x)
 
@@ -30,7 +38,7 @@ pocatecni_pocet_vojaku = 100
 seznam_vojaku = []
 
 for nabor in range(pocatecni_pocet_vojaku):
-    vojak = (random.randint(bod1_x, bod2_x), random.randint(bod1_y, bod2_y))
+    vojak = (random.randint(bod3_x, bod4_x), random.randint(bod3_y, bod4_y))
     seznam_vojaku.append(vojak)
 
 pygame.init()
@@ -49,19 +57,13 @@ while True:
     od_minula_ms = cas_ted - bod_v_case
     
     if od_minula_ms > 1000:
-        vojak = (random.randint(bod1_x, bod2_x), random.randint(bod1_y, bod2_y))
+        vojak = (random.randint(bod3_x, bod4_x), random.randint(bod3_y, bod4_y))
         seznam_vojaku.append(vojak)
         
-        
-        
         bod_v_case = cas_ted 
-    
-   
-    
-            
     okno.fill(BARVA_POZADI)
     
-    pygame.draw.circle(okno,(255,8,0),(x,y),5)
+    # pozůstatek jezdícího míčku: pygame.draw.circle(okno,(255,8,0),(x,y),5)
     for v in seznam_vojaku:
         pygame.draw.circle(okno,(255,8,0),v,5)
     
