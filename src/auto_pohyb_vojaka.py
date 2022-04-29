@@ -14,6 +14,9 @@ bod1_x = random.randint(0,ROZLISENI_X)
 bod2_y = random.randint(0,ROZLISENI_Y)
 bod2_x = random.randint(0, ROZLISENI_X)
 
+bod1_x, bod2_x = min(bod1_x, bod2_x), max(bod1_x, bod2_x)
+bod1_y, bod2_y = min(bod1_y, bod2_y), max(bod1_y, bod2_y)
+
 #Bod 3
 
 a = math.atan2(bod2_y - bod1_y,bod2_x - bod1_x)
