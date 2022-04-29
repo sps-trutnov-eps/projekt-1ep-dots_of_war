@@ -24,4 +24,15 @@ cesty = [
     (body[36], body[22]), (body[36], body[30]), (body[36], body[38]), (body[38], body[32]), (body[38], body[39], body[33], body[26]) #M, N, O, P, Q
         ]
 
-mapa = {"body":body,"vyhybky":vyhybky,"cesty":cesty}
+veze = [
+    {"pozice":((abs(cesty[0][1][0] - cesty[0][2][0])/2) + cesty[0][1][0], (abs(cesty[0][1][1] - cesty[0][2][1])/2) + cesty[0][2][1]),"hrac":"s","hp":1}, #A
+    {"pozice":((abs(cesty[1][0][0] - cesty[1][1][0])/2) + cesty[1][0][0], (abs(cesty[1][0][1] - cesty[1][1][1])/2) + cesty[1][1][1]),"hrac":"s","hp":1}, #B
+    {"pozice":((abs(cesty[6][1][0] - cesty[6][2][0])/2) + cesty[6][1][0], (abs(cesty[6][1][1] - cesty[6][2][1])/2) + cesty[6][2][1]),"hrac":"s","hp":1}, #G
+    {"pozice":((abs(cesty[8][0][0] - cesty[8][1][0])/2) + cesty[8][0][0], (abs(cesty[8][0][1] - cesty[8][1][1])/2) + cesty[8][1][1]),"hrac":"s","hp":1}, #R
+    {"pozice":((abs(cesty[10][0][0] - cesty[10][1][0])/2) + cesty[10][0][0], (abs(cesty[10][0][1] - cesty[10][1][1])/2) + cesty[10][1][1]),"hrac":"j","hp":1}, #J
+    {"pozice":((abs(cesty[13][0][0] - cesty[13][1][0])/2) + cesty[13][0][0], (abs(cesty[13][0][1] - cesty[13][1][1])/2) + cesty[13][1][1]),"hrac":"j","hp":1}, #M
+    {"pozice":((abs(cesty[15][0][0] - cesty[15][1][0])/2) + cesty[15][0][0], (abs(cesty[15][0][1] - cesty[15][1][1])/2) + cesty[15][1][1]),"hrac":"j","hp":1}, #O
+    {"pozice":((abs(cesty[17][1][0] - cesty[17][2][0])/2) + cesty[17][1][0], (abs(cesty[17][1][1] - cesty[17][2][1])/2) + cesty[17][2][1]),"hrac":"j","hp":1} #Q
+       ]
+
+mapa = {"body":body,"vyhybky":vyhybky,"cesty":cesty,"veze":veze}
