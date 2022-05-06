@@ -43,7 +43,7 @@ sekundarni_seznam =[
 aktivni = seznam_objektu
 povoleni_a = True
 
-while True:
+def pohni():
     udalosti = pygame.event.get()
     stisknuto = pygame.key.get_pressed()
     
