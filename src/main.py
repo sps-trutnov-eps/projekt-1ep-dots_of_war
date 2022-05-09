@@ -93,7 +93,5 @@ while True:
     pohni(mapa)
     zobraz_mapu(mapa)
     
-    print(k_right, k_left, povoleni_r, povoleni_l, povoleni_a)
-    
     pygame.display.update()
     hodinky.tick(60)

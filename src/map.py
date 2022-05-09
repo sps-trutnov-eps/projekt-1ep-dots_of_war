@@ -9,7 +9,7 @@ body = [
         ]
 
 vyhybky_s = [
-    {"pozice":body[10],"stav":False,"hrac":"s","rozcesti":("Z","JZ"),"vybrano":False},
+    {"pozice":body[10],"stav":False,"hrac":"s","rozcesti":("Z","JZ"),"vybrano":True},
     {"pozice":body[16],"stav":False,"hrac":"s","rozcesti":("JZ","J"),"vybrano":False},
     {"pozice":body[18],"stav":False,"hrac":"s","rozcesti":("Z","J"),"vybrano":False},
     {"pozice":body[25],"stav":False,"hrac":"s","rozcesti":("JZ","J"),"vybrano":False},

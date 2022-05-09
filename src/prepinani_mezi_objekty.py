@@ -101,6 +101,7 @@ def pohni(mapa):
         if aktivni == mapa["vyhybky_s"]:
             if objekt['vybrano'] == True:
                 pygame.draw.circle(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150), 15)
+                print("kreslím")
 
     for objekt in mapa["veze_s"]:
         
