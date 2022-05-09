@@ -97,15 +97,19 @@ def pohni(mapa, k_right, k_left, povoleni_r, povoleni_l, povoleni_a, aktivni):
                 aktivni[i]['vybrano'] = False
                 break
         povoleni_l = False       
-           
+        
+    print(aktivni)    
+    
     for objekt in mapa["vyhybky_s"]:
         
-        if aktivni == seznam_objektu:
+        if aktivni == mapa["vyhybky_s"]:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0], objekt['pozice'][1], w2, h2))
+                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150, w2, h2))
 
     for objekt in mapa["veze_s"]:
         
-        if aktivni == sekundarni_seznam:
+        if aktivni == mapa["veze_s"]:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0], objekt['pozice'][1], w2, h2))
+                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150, w2, h2))
+                
+    return mapa, k_right, k_left, povoleni_r, povoleni_l, povoleni_a, aktivni
