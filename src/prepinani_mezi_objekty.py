@@ -14,11 +14,6 @@ w2 = 70
 h2 = 70
 rozdil_ctverecku = 10
 
-k_left = False
-k_right = False
-povoleni_l = False
-povoleni_r = False
-
 pygame.init()
 
 pygame.display.set_caption('Dots of War - ovládání')
@@ -40,10 +35,7 @@ sekundarni_seznam =[
                     {'pozice_x':550, 'pozice_y': 200, 'vybrano': False},
                    ]
 
-aktivni = seznam_objektu
-povoleni_a = True
-
-def pohni():
+def pohni(mapa, k_right, k_left, povoleni_r, povoleni_l, povoleni_a, aktivni):
     udalosti = pygame.event.get()
     stisknuto = pygame.key.get_pressed()
     
@@ -81,10 +73,10 @@ def pohni():
     if stisknuto[pygame.K_UP] or stisknuto[pygame.K_DOWN]:
         if povoleni_a == True:
             povoleni_a = False
-            if aktivni == sekundarni_seznam:
-                aktivni = seznam_objektu
-            elif aktivni == seznam_objektu:
-                aktivni = sekundarni_seznam
+            if aktivni == mapa["vyhybky_s"]:
+                aktivni = mapa["veze_s"]
+            elif aktivni == mapa["veze_s"]:
+                aktivni = mapa["vyhybky_s"]
     else:
         povoleni_a = True
     
@@ -104,28 +96,16 @@ def pohni():
                 aktivni[(i - 1) % len(aktivni)]['vybrano'] = True
                 aktivni[i]['vybrano'] = False
                 break
-        povoleni_l = False
-        
-   
-    okno.fill(BARVA_POZADI)        
+        povoleni_l = False       
            
-    for objekt in seznam_objektu:
+    for objekt in mapa["vyhybky_s"]:
         
         if aktivni == seznam_objektu:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice_x'] - rozdil_ctverecku, objekt['pozice_y'] - rozdil_ctverecku, w2, h2))
-                pygame.draw.rect(okno, (BARVA_OBJEKTU), (objekt['pozice_x'], objekt['pozice_y'], w, h))
-            
-        pygame.draw.rect(okno, (BARVA_OBJEKTU), (objekt['pozice_x'], objekt['pozice_y'], w, h))
+                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0], objekt['pozice'][1], w2, h2))
 
-    for objekt in sekundarni_seznam:
+    for objekt in mapa["veze_s"]:
         
         if aktivni == sekundarni_seznam:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice_x'] - rozdil_ctverecku, objekt['pozice_y'] - rozdil_ctverecku, w2, h2))
-                pygame.draw.rect(okno, (BARVA_DRUHA), (objekt['pozice_x'], objekt['pozice_y'], w, h))
-            
-        pygame.draw.rect(okno, (BARVA_DRUHA), (objekt['pozice_x'], objekt['pozice_y'], w, h))
-    
-
-    pygame.display.update()
+                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0], objekt['pozice'][1], w2, h2))

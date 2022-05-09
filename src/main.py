@@ -1,6 +1,6 @@
-from map import mapa
 import pygame
 import sys
+from map import mapa
 from prepinani_mezi_objekty import *
 
 pozadi = 20,150,20
@@ -81,6 +81,13 @@ def zobraz_mapu(mapa):
 
             pygame.draw.rect(okno, barva, (pozice_x, pozice_y, sirka, vyska))
 
+k_left = False
+k_right = False
+povoleni_l = False
+povoleni_r = False
+povoleni_a = True
+aktivni = mapa["vyhybky_s"]
+
 while True:
     udalosti = pygame.event.get()
     for udalost in udalosti:
@@ -91,6 +98,7 @@ while True:
     okno.fill(pozadi)
     
     zobraz_mapu(mapa)
+    pohni(mapa, k_right, k_left, povoleni_r, povoleni_l, povoleni_a, aktivni)
     
     pygame.display.update()
     hodinky.tick(60)
