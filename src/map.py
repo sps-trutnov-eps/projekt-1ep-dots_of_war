@@ -17,7 +17,7 @@ vyhybky_s = [
             ]
     
 vyhybky_j = [
-    {"pozice":body[22],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":False},
+    {"pozice":body[22],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":True},
     {"pozice":body[23],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":False}, 
     {"pozice":body[30],"stav":False,"hrac":"j","rozcesti":("S","V"),"vybrano":False},
     {"pozice":body[32],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":False},
@@ -40,7 +40,7 @@ veze_s = [
          ]
     
 veze_j = [
-    {"pozice":((abs(cesty[10][0][0] - cesty[10][1][0])/2) + cesty[10][0][0], (abs(cesty[10][0][1] - cesty[10][1][1])/2) + cesty[10][1][1]),"hrac":"j","hp":1,"vybrano":False}, #J
+    {"pozice":((abs(cesty[10][0][0] - cesty[10][1][0])/2) + cesty[10][0][0], (abs(cesty[10][0][1] - cesty[10][1][1])/2) + cesty[10][1][1]),"hrac":"j","hp":1,"vybrano":True}, #J
     {"pozice":((abs(cesty[13][0][0] - cesty[13][1][0])/2) + cesty[13][0][0], (abs(cesty[13][0][1] - cesty[13][1][1])/2) + cesty[13][1][1]),"hrac":"j","hp":1,"vybrano":False}, #M
     {"pozice":((abs(cesty[15][0][0] - cesty[15][1][0])/2) + cesty[15][0][0], (abs(cesty[15][0][1] - cesty[15][1][1])/2) + cesty[15][1][1]),"hrac":"j","hp":1,"vybrano":False}, #O
     {"pozice":((abs(cesty[17][1][0] - cesty[17][2][0])/2) + cesty[17][1][0], (abs(cesty[17][1][1] - cesty[17][2][1])/2) + cesty[17][2][1]),"hrac":"j","hp":1,"vybrano":False} #Q
