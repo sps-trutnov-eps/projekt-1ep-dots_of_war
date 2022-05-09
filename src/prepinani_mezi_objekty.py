@@ -1,6 +1,7 @@
 # zkouska na vybirani objektu a presckavani mezi nimi
 import pygame
 import sys
+from map import mapa
 
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 800, 600
 
@@ -10,8 +11,8 @@ BARVA_OBJEKTU_ZVYRAZNENO = 255, 255, 255
 BARVA_DRUHA = 0,255,0
 w = 50
 h = 50
-w2 = 70
-h2 = 70
+w2 = 18
+h2 = 30
 rozdil_ctverecku = 10
 
 pygame.init()
@@ -19,23 +20,20 @@ pygame.init()
 pygame.display.set_caption('Dots of War - ovládání')
 okno = pygame.display.set_mode(ROZLISENI_OKNA)
 
-seznam_objektu = [
-                    {'pozice_x':150, 'pozice_y': 400, 'vybrano': True},
-                    {'pozice_x':250, 'pozice_y': 400, 'vybrano': False},
-                    {'pozice_x':350, 'pozice_y': 400, 'vybrano': False},
-                    {'pozice_x':450, 'pozice_y': 400, 'vybrano': False},
-                    {'pozice_x':550, 'pozice_y': 400, 'vybrano': False},
-                    ]
+k_left = False
+k_right = False
+povoleni_l = False
+povoleni_r = False
+povoleni_a = True
+aktivni = mapa["vyhybky_s"]
 
-sekundarni_seznam =[
-                    {'pozice_x':150, 'pozice_y': 200, 'vybrano': True},
-                    {'pozice_x':250, 'pozice_y': 200, 'vybrano': False},
-                    {'pozice_x':350, 'pozice_y': 200, 'vybrano': False},
-                    {'pozice_x':450, 'pozice_y': 200, 'vybrano': False},
-                    {'pozice_x':550, 'pozice_y': 200, 'vybrano': False},
-                   ]
-
-def pohni(mapa, k_right, k_left, povoleni_r, povoleni_l, povoleni_a, aktivni):
+def pohni(mapa):
+    global k_right
+    global k_left
+    global povoleni_r
+    global povoleni_l
+    global povoleni_a
+    global aktivni
     udalosti = pygame.event.get()
     stisknuto = pygame.key.get_pressed()
     
@@ -96,20 +94,18 @@ def pohni(mapa, k_right, k_left, povoleni_r, povoleni_l, povoleni_a, aktivni):
                 aktivni[(i - 1) % len(aktivni)]['vybrano'] = True
                 aktivni[i]['vybrano'] = False
                 break
-        povoleni_l = False       
-        
-    print(aktivni)    
+        povoleni_l = False         
     
     for objekt in mapa["vyhybky_s"]:
         
         if aktivni == mapa["vyhybky_s"]:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150, w2, h2))
+                pygame.draw.circle(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150), 15)
 
     for objekt in mapa["veze_s"]:
         
         if aktivni == mapa["veze_s"]:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150, w2, h2))
+                pygame.draw.rect(okno, (BARVA_OBJEKTU_ZVYRAZNENO), ((objekt['pozice'][0] * 150) -9, (objekt['pozice'][1] * 150) - 15, w2, h2))
                 
-    return mapa, k_right, k_left, povoleni_r, povoleni_l, povoleni_a, aktivni
+    return mapa

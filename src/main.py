@@ -81,13 +81,6 @@ def zobraz_mapu(mapa):
 
             pygame.draw.rect(okno, barva, (pozice_x, pozice_y, sirka, vyska))
 
-k_left = False
-k_right = False
-povoleni_l = False
-povoleni_r = False
-povoleni_a = True
-aktivni = mapa["vyhybky_s"]
-
 while True:
     udalosti = pygame.event.get()
     for udalost in udalosti:
@@ -97,8 +90,10 @@ while True:
     
     okno.fill(pozadi)
     
+    pohni(mapa)
     zobraz_mapu(mapa)
-    pohni(mapa, k_right, k_left, povoleni_r, povoleni_l, povoleni_a, aktivni)
+    
+    print(k_right, k_left, povoleni_r, povoleni_l, povoleni_a)
     
     pygame.display.update()
     hodinky.tick(60)
