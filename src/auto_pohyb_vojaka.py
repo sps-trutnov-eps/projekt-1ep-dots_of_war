@@ -15,6 +15,8 @@ velikost_bileho_obdelniku_x = 230
 velikost_bileho_obdelniku_y = 230
 velikost_kasaren_x = 250
 velikost_kasaren_y = 250
+startovni_pozice_cary_XY = 250, 775
+konecna_pozice_cary_XY = 850, 775 
 
 #Bod 1
 vojaci_kasarny_levy_horni_bod_y = souradnice_bileho_obdelniku_y
@@ -35,7 +37,7 @@ pocatecni_pocet_vojaku = 100
 seznam_vojaku = []
 
 for nabor in range(pocatecni_pocet_vojaku):
-    vojak = (random.randint(vojaci_kasarny_levy_horni_bod_x, vojaci_kasarny_pravy_dolni_bod_x), random.randint(vojaci_kasarny_levy_horni_bod_y, vojaci_kasarny_pravy_dolni_bod_y))
+    vojak = (random.randint(vojaci_kasarny_levy_horni_bod_x , vojaci_kasarny_pravy_dolni_bod_x-26), random.randint(vojaci_kasarny_levy_horni_bod_y, vojaci_kasarny_pravy_dolni_bod_y-26))
     seznam_vojaku.append(vojak)
 
 pygame.init()
@@ -54,7 +56,7 @@ while True:
     od_minula_ms = cas_ted - bod_v_case
     
     if od_minula_ms > 1000:
-        vojak = (random.randint(vojaci_kasarny_levy_horni_bod_x, vojaci_kasarny_pravy_dolni_bod_x), random.randint(vojaci_kasarny_levy_horni_bod_y, vojaci_kasarny_pravy_dolni_bod_y))
+        vojak = (random.randint(vojaci_kasarny_levy_horni_bod_x, vojaci_kasarny_pravy_dolni_bod_x-26), random.randint(vojaci_kasarny_levy_horni_bod_y, vojaci_kasarny_pravy_dolni_bod_y-26))
         seznam_vojaku.append(vojak)
         
         
@@ -69,6 +71,7 @@ while True:
     pygame.draw.rect(okno, (0,0,0), ((souradnice_kasaren_x, souradnice_kasaren_y), (velikost_kasaren_x, velikost_kasaren_y)))
     pygame.draw.rect(okno, (255,255,255), ((souradnice_bileho_obdelniku_x, souradnice_bileho_obdelniku_y) , (velikost_bileho_obdelniku_x, velikost_bileho_obdelniku_y)))
     pygame.draw.circle(okno,(255,8,0),(x,y),5)
+    pygame.draw.line(okno, (0,0,0), (startovni_pozice_cary_XY), (konecna_pozice_cary_XY), 5)
     for v in seznam_vojaku:
         pygame.draw.circle(okno,(255,8,0),v,5)
     
