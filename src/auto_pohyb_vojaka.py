@@ -47,6 +47,7 @@ vojak_y = random.randint(ROZLISENI_Y - 300,ROZLISENI_Y)
 #pohyb
 hledani_x = []
 chozeni_x = -1
+kontrola: 0
 
 a = math.atan2(bod2_y - bod1_y,bod2_x - bod1_x)
 
@@ -67,11 +68,20 @@ okno = pygame.display.set_mode(ROZLISENI_OKNA)
 x = bod1_x
 y = bod1_y
 while True:
-    udalosti = pygame.event.get()
-    for u in udalosti:
-        if u.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+    for event in  pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                       if chozeni_x < len(seznam_vojaku):
+                            chozeni_x += 1
+                            hledani_x.append(chozeni_x)
+                       else:
+                            chozeni_x = chozeni_x
+                    
+                        
+                            
     stisknuto = pygame.key.get_pressed()
     vojak_x = random.randint(0,300)
     vojak_y = random.randint(ROZLISENI_Y - 300,ROZLISENI_Y)       
@@ -79,18 +89,14 @@ while True:
     od_minula_ms = cas_ted - bod_v_case
     od_minula2_ms = cas_ted - bod2_v_case
     if od_minula_ms > 700:
-        
-        hledani_x.append(chozeni_x + 1)
-        chozeni_x += 1
+    
         
         vojak = [vojak_x, vojak_y]
         seznam_vojaku.append(vojak)
-        
-        for x_1 in hledani_x:
-        #pohyb_x prvniho vojaka
-            seznam_vojaku[x_1][0] += 40
-    
         bod_v_case = cas_ted
+        
+    
+      
         
     okno.fill(BARVA_POZADI)
     
@@ -99,8 +105,15 @@ while True:
         pygame.draw.circle(okno,(255,8,0),v,rad)
     for p_v in seznam_vojaku_na_pochodu:
         pygame.draw.circle(okno,(255,8,0),(p_v),rad)
+    for x_1 in hledani_x:
+     #pohyb_x prvniho vojaka
+        if chozeni_x < len(seznam_vojaku):
+                            seznam_vojaku[x_1][0] += 0.1 
+        else:
+            chozeni_x = chozeni_x
+
+    
     pygame.draw.line(okno,(0,0,0),(x_cary,y_cary),(x1_cary,y1_cary),w)
     pygame.draw.line(okno,(0,0,0),(x_cary1,y_cary1),(x1_cary1,y1_cary1),w)
-    
         
     pygame.display.update()
