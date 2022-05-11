@@ -34,7 +34,8 @@ vojak_x = random.randint(0,300)
 vojak_y = random.randint(ROZLISENI_Y - 300,ROZLISENI_Y)
 
 #pohyb
-hledani_x = -1
+hledani_x = []
+chozeni_x = -1
 
 a = math.atan2(bod2_y - bod1_y,bod2_x - bod1_x)
 
@@ -67,14 +68,17 @@ while True:
     od_minula_ms = cas_ted - bod_v_case
     od_minula2_ms = cas_ted - bod2_v_case
     if od_minula_ms > 700:
-        hledani_x += 1
+        
+        hledani_x.append(chozeni_x + 1)
+        chozeni_x += 1
+        
         vojak = [vojak_x, vojak_y]
         seznam_vojaku.append(vojak)
         
+        for x_1 in hledani_x:
         #pohyb_x prvniho vojaka
-        seznam_vojaku[0][0] += 40
-        #pohyb_y prvniho vojaka
-        seznam_vojaku[0][1] += 40
+            seznam_vojaku[x_1][0] += 40
+    
         bod_v_case = cas_ted
         
     okno.fill(BARVA_POZADI)
