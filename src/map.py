@@ -40,10 +40,24 @@ veze_s = [
          ]
     
 veze_j = [
-    {"pozice":((abs(cesty[10][0][0] - cesty[10][1][0])/2) + cesty[10][0][0], (abs(cesty[10][0][1] - cesty[10][1][1])/2) + cesty[10][1][1]),"hrac":"j","hp":1,"vybrano":True}, #J
-    {"pozice":((abs(cesty[13][0][0] - cesty[13][1][0])/2) + cesty[13][0][0], (abs(cesty[13][0][1] - cesty[13][1][1])/2) + cesty[13][1][1]),"hrac":"j","hp":1,"vybrano":False}, #M
+    {"pozice":((abs(cesty[13][0][0] - cesty[13][1][0])/2) + cesty[13][0][0], (abs(cesty[13][0][1] - cesty[13][1][1])/2) + cesty[13][1][1]),"hrac":"j","hp":1,"vybrano":True}, #M
+    {"pozice":((abs(cesty[10][0][0] - cesty[10][1][0])/2) + cesty[10][0][0], (abs(cesty[10][0][1] - cesty[10][1][1])/2) + cesty[10][1][1]),"hrac":"j","hp":1,"vybrano":False}, #J
     {"pozice":((abs(cesty[15][0][0] - cesty[15][1][0])/2) + cesty[15][0][0], (abs(cesty[15][0][1] - cesty[15][1][1])/2) + cesty[15][1][1]),"hrac":"j","hp":1,"vybrano":False}, #O
     {"pozice":((abs(cesty[17][1][0] - cesty[17][2][0])/2) + cesty[17][1][0], (abs(cesty[17][1][1] - cesty[17][2][1])/2) + cesty[17][2][1]),"hrac":"j","hp":1,"vybrano":False} #Q
          ]
 
-mapa = {"body":body,"vyhybky_s":vyhybky_s,"vyhybky_j":vyhybky_j,"cesty":cesty,"veze_s":veze_s,"veze_j":veze_j}
+zakladna_s = {"body":(body[6], (4.5, 0), (4.5, 1), (5, 1.5), (6, 1.5)),"hrac":"s"}
+brany_s = [
+    {"pozice":zakladna_s["body"][3],"stav":False},
+    {"pozice":(abs(zakladna_s["body"][3][0] - zakladna_s["body"][4][0]) + zakladna_s["body"][3][0],abs(zakladna_s["body"][3][1] - zakladna_s["body"][4][1]) + zakladna_s["body"][3][1]),"stav":False},
+    {"pozice":zakladna_s["body"][4],"stav":False}
+          ]
+
+zakladna_j = {"body":(body[42], (1.5, 6), (1.5, 5), (1, 4.5), (0, 4.5)), "hrac":"j"}
+brany_j = [
+    {"pozice":zakladna_j["body"][3],"stav":False},
+    {"pozice":(abs(zakladna_j["body"][3][0] - zakladna_j["body"][4][0]) + zakladna_j["body"][4][0],abs(zakladna_j["body"][3][1] - zakladna_j["body"][4][1]) + zakladna_j["body"][4][1]),"stav":False},
+    {"pozice":zakladna_j["body"][4],"stav":False}
+          ]
+
+mapa = {"body":body,"vyhybky_s":vyhybky_s,"vyhybky_j":vyhybky_j,"cesty":cesty,"veze_s":veze_s,"veze_j":veze_j,"zakladna_s":zakladna_s,"zakladna_j":zakladna_j}

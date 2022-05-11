@@ -7,8 +7,8 @@ ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 800, 600
 
 BARVA_POZADI = 0, 0, 0
 BARVA_OBJEKTU = 200, 30, 30
-BARVA_Z_SEVER = 130, 130, 255
-BARVA_Z_JIH = 255, 130, 130
+BARVA_Z_SEVER = 200, 200, 255
+BARVA_Z_JIH = 255, 200, 200
 w = 50
 h = 50
 w2 = 18
@@ -33,7 +33,7 @@ povoleni_prepnuti_j = True
 aktivni_s = mapa["vyhybky_s"]
 aktivni_j = mapa["vyhybky_j"]
 
-def pohni(mapa):
+def oznac(mapa):
     global k_right
     global k_left
     global k_a

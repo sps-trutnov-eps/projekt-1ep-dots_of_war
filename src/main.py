@@ -36,7 +36,7 @@ def zobraz_mapu(mapa):
             else:
                 barva = 0,0,255
             polomer = 10
-            tloustka = 5
+            tloustka = 6
             
             if vyhybka["hrac"] == "j":
                 if vyhybka["stav"] == False:
@@ -80,6 +80,18 @@ def zobraz_mapu(mapa):
                     barva = 255,0,0
 
             pygame.draw.rect(okno, barva, (pozice_x, pozice_y, sirka, vyska))
+    
+    body_s = []
+    for bod in mapa["zakladna_s"]["body"]:
+        body_s.append((bod[0] * 150, bod[1] * 150))
+    pygame.draw.polygon(okno, pozadi, body_s)
+    pygame.draw.polygon(okno, (0,0,255), body_s, 5)
+    
+    body_j = []
+    for bod in mapa["zakladna_j"]["body"]:
+        body_j.append((bod[0] * 150, bod[1] * 150))
+    pygame.draw.polygon(okno, pozadi, body_j)
+    pygame.draw.polygon(okno, (255,0,0), body_j, 5)
 
 while True:
     udalosti = pygame.event.get()
@@ -90,7 +102,7 @@ while True:
     
     okno.fill(pozadi)
     
-    pohni(mapa)
+    oznac(mapa)
     zobraz_mapu(mapa)
     
     pygame.display.update()
