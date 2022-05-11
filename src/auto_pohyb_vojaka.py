@@ -9,6 +9,17 @@ cas = pygame.time.Clock()
 bod_v_case = pygame.time.get_ticks()
 bod2_v_case = pygame.time.get_ticks()
 rad = 5
+# vodorovná čára základny
+x_cary = 0
+y_cary = ROZLISENI_Y - 300
+x1_cary = 300
+y1_cary = ROZLISENI_Y - 300
+w = 5
+# cara dolu
+x_cary1 = 300
+y_cary1 = ROZLISENI_Y - 300
+x1_cary1 = 300
+y1_cary1 = ROZLISENI_Y
 
 #Bod 1 bod spawnu míčku, který leze
 bod1_y = ROZLISENI_Y - ROZLISENI_Y/3
@@ -88,5 +99,8 @@ while True:
         pygame.draw.circle(okno,(255,8,0),v,rad)
     for p_v in seznam_vojaku_na_pochodu:
         pygame.draw.circle(okno,(255,8,0),(p_v),rad)
+    pygame.draw.line(okno,(0,0,0),(x_cary,y_cary),(x1_cary,y1_cary),w)
+    pygame.draw.line(okno,(0,0,0),(x_cary1,y_cary1),(x1_cary1,y1_cary1),w)
+    
         
     pygame.display.update()
