@@ -67,10 +67,14 @@ while True:
     od_minula_ms = cas_ted - bod_v_case
     od_minula2_ms = cas_ted - bod2_v_case
     if od_minula_ms > 700:
+        hledani_x += 1
         vojak = [vojak_x, vojak_y]
         seznam_vojaku.append(vojak)
-        for vojak in seznam_vojaku:
-            vojak[0] += 400
+        
+        #pohyb_x prvniho vojaka
+        seznam_vojaku[0][0] += 40
+        #pohyb_y prvniho vojaka
+        seznam_vojaku[0][1] += 40
         bod_v_case = cas_ted
         
     okno.fill(BARVA_POZADI)
