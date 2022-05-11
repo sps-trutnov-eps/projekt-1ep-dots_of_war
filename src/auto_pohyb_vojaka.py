@@ -77,6 +77,7 @@ while True:
                        if chozeni_x < len(seznam_vojaku):
                             chozeni_x += 1
                             hledani_x.append(chozeni_x)
+                        
                        else:
                             chozeni_x = chozeni_x
                     
@@ -108,7 +109,20 @@ while True:
     for x_1 in hledani_x:
      #pohyb_x prvniho vojaka
         if chozeni_x < len(seznam_vojaku):
-                            seznam_vojaku[x_1][0] += 0.1 
+            b = math.atan2( bod1_y - seznam_vojaku[x_1][1], bod1_x - seznam_vojaku[x_1][0]) 
+            seznam_vojaku[x_1][0] += 0.5 * math.cos(b)
+            seznam_vojaku[x_1][1] += 0.5 * math.sin(b)
+            
+            
+            
+            
+            #ještě nefunuje
+            if seznam_vojaku[x_1][0] == bod1_x and seznam_vojaku[x_1][1] == bod1_y:
+                seznam_vojaku[x_1][0] += 1 * math.cos(a)
+                seznam_vojaku[x_1][1] += 1 * math.sin(a)
+                
+                
+                
         else:
             chozeni_x = chozeni_x
 
