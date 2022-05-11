@@ -26,8 +26,8 @@ bod1_y = ROZLISENI_Y - ROZLISENI_Y/3
 bod1_x = 300
 
 #Bod 2, bod 
-bod2_y = 200
-bod2_x = ROZLISENI_X - 300
+bod2_y = random.randint(0 + rad,ROZLISENI_Y/2 - rad)
+bod2_x = random.randint(300 + rad,ROZLISENI_X - rad)
 
 #bod 3, bod začáku základny
 bod3_x = rad
@@ -115,5 +115,5 @@ while True:
     
     pygame.draw.line(okno,(0,0,0),(x_cary,y_cary),(x1_cary,y1_cary),w)
     pygame.draw.line(okno,(0,0,0),(x_cary1,y_cary1),(x1_cary1,y1_cary1),w)
-        
+    pygame.draw.line(okno,(0,0,0),(bod1_x,bod1_y),(bod2_x,bod2_y),w)  
     pygame.display.update()
