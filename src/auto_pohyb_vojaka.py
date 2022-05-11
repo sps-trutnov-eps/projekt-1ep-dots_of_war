@@ -1,7 +1,7 @@
 import pygame
 import sys
 import random
-import math
+#import math
 
 ####### Parametry #######
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1800,900
@@ -9,6 +9,7 @@ BARVA_POZADI = 255,255,255
 cas = pygame.time.Clock()
 cas_spawnu_posledniho_vojaka = pygame.time.get_ticks()
 cas_odchodu_posledniho_vojaka_na_frontu = pygame.time.get_ticks()
+cas_od_posledniho_pohybu_vojaku_na_ceste = pygame.time.get_ticks()
 souradnice_kasaren_x = 0
 souradnice_kasaren_y = 650
 souradnice_bileho_obdelniku_x = 10
@@ -18,7 +19,15 @@ velikost_bileho_obdelniku_y = 230
 velikost_kasaren_x = 250
 velikost_kasaren_y = 250
 startovni_pozice_cary_XY = 250, 775
-konecna_pozice_cary_XY = 850, 775 
+konecna_pozice_cary_XY = 850, 775
+souradnice_dveri_otevrenych_x = 250
+souradnice_dveri_otevrenych_y = 785
+velikost_dveri_otevrenych_x = 100
+velikost_dveri_otevrenych_y = 15
+souradnice_dveri_zavrenych_x = 250
+souradnice_dveri_zavrenych_y = 725
+velikost_dveri_zavrenych_x = 15
+velikost_dveri_zavrenych_y = 100
 
 ####### Souřadnice kasáren levého horního bodu #######
 vojaci_kasarny_levy_horni_bod_y = souradnice_bileho_obdelniku_y
@@ -78,11 +87,18 @@ while True:
             vojak_nove_na_ceste = seznam_vojaku.pop()
             seznam_vojaku_na_ceste.append(vojak_nove_na_ceste)
             vojak_nove_na_ceste[0], vojak_nove_na_ceste[1] = startovni_pozice_cary_XY
-            cas_odchodu_posledniho_vojaka_na_frontu = pygame.time.get_ticks()        
+            cas_odchodu_posledniho_vojaka_na_frontu = pygame.time.get_ticks()
             
-        for v in seznam_vojaku_na_ceste:
-            v[0] += 1
+    doba_od_posledniho_pohybu_vojaku_na_ceste = pygame.time.get_ticks() - cas_od_posledniho_pohybu_vojaku_na_ceste
+    
+    if doba_od_posledniho_pohybu_vojaku_na_ceste > 500:
+        for v in seznam_vojaku_na_ceste:   
+                v[0] += 20
+            if v[0] == konecna_pozice_cary_XY:
+                v[0] = 0
             
+ 
+        cas_od_posledniho_pohybu_vojaku_na_ceste = pygame.time.get_ticks()
             
    
     
@@ -90,8 +106,12 @@ while True:
     okno.fill(BARVA_POZADI)
     
     pygame.draw.rect(okno, (0,0,0), ((souradnice_kasaren_x, souradnice_kasaren_y), (velikost_kasaren_x, velikost_kasaren_y)))
-    pygame.draw.rect(okno, (255,255,255), ((souradnice_bileho_obdelniku_x, souradnice_bileho_obdelniku_y) , (velikost_bileho_obdelniku_x, velikost_bileho_obdelniku_y)))
+    pygame.draw.rect(okno, (255,255,255), ((souradnice_bileho_obdelniku_x, souradnice_bileho_obdelniku_y), (velikost_bileho_obdelniku_x, velikost_bileho_obdelniku_y)))
     pygame.draw.line(okno, (0,0,0), (startovni_pozice_cary_XY), (konecna_pozice_cary_XY), 5)
+    if dvere_otevreny == False:
+        pygame.draw.rect(okno, (255,0,0), ((souradnice_dveri_zavrenych_x, souradnice_dveri_zavrenych_y), (velikost_dveri_zavrenych_x, velikost_dveri_zavrenych_y)))
+    if dvere_otevreny == True:
+        pygame.draw.rect(okno, (255,0,0), ((souradnice_dveri_otevrenych_x, souradnice_dveri_otevrenych_y), (velikost_dveri_otevrenych_x, velikost_dveri_otevrenych_y)))  
     for v in seznam_vojaku:
         pygame.draw.circle(okno,(255,8,0),v,5)
     for v in seznam_vojaku_na_ceste:
