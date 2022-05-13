@@ -37,7 +37,7 @@ while True:
     okno.fill(BARVA_POZADI)
     
     pygame.draw.line(okno, (0,0,0), (zacatek_cary), (konec_cary), (tloustka_cary))
-    pygame.draw.ellipse(okno,(255,0,0),(bod_xy),5)
+    pygame.draw.circle(okno,(255,0,0),(bod_xy), 5)
     
     
     
