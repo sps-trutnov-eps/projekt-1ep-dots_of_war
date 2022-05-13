@@ -102,6 +102,15 @@ def zobraz_mapu(mapa):
         napis = text.get_rect()
         napis.center = (cislo["pozice"][0] * 150, cislo["pozice"][1] * 150)
         okno.blit(text, napis)
+    
+    for i, cislo in enumerate(mapa["cisla_j"]):
+        if mapa["brany_j"][i]["stav"]:
+            pygame.draw.circle(okno, BARVA_OZNACENI_JIH, (mapa["brany_j"][i]["pozice"][0] * 150,mapa["brany_j"][i]["pozice"][1] * 150), 15)
+        pygame.draw.circle(okno, (255,0,0), (mapa["brany_j"][i]["pozice"][0] * 150,mapa["brany_j"][i]["pozice"][1] * 150), 10)
+        text = font.render(cislo["cislo"], True, (255,255,255), (255,0,0))
+        napis = text.get_rect()
+        napis.center = (cislo["pozice"][0] * 150, cislo["pozice"][1] * 150)
+        okno.blit(text, napis)
 
 while True:
     udalosti = pygame.event.get()
