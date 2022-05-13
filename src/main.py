@@ -12,6 +12,7 @@ pygame.init()
 pygame.display.set_caption("Dots of War")
 okno = pygame.display.set_mode(rozliseni)
 hodinky = pygame.time.Clock()
+font = pygame.font.SysFont("oldenglishtext.ttf", 24)
     
 def zobraz_mapu(mapa):
     for cesta in mapa["cesty"]:
@@ -92,6 +93,15 @@ def zobraz_mapu(mapa):
         body_j.append((bod[0] * 150, bod[1] * 150))
     pygame.draw.polygon(okno, pozadi, body_j)
     pygame.draw.polygon(okno, (255,0,0), body_j, 5)
+    
+    for i, cislo in enumerate(mapa["cisla_s"]):
+        if mapa["brany_s"][i]["stav"]:
+            pygame.draw.circle(okno, BARVA_OZNACENI_SEVER, (mapa["brany_s"][i]["pozice"][0] * 150,mapa["brany_s"][i]["pozice"][1] * 150), 15)
+        pygame.draw.circle(okno, (0,0,255), (mapa["brany_s"][i]["pozice"][0] * 150,mapa["brany_s"][i]["pozice"][1] * 150), 10)
+        text = font.render(cislo["cislo"], True, (255,255,255), (0,0,255))
+        napis = text.get_rect()
+        napis.center = (cislo["pozice"][0] * 150, cislo["pozice"][1] * 150)
+        okno.blit(text, napis)
 
 while True:
     udalosti = pygame.event.get()
@@ -100,9 +110,16 @@ while True:
             pygame.quit()
             sys.exit()
     
+    stisk = pygame.key.get_pressed()
+    
+    if stisk[pygame.K_ESCAPE]:
+        pygame.quit()
+        sys.exit()
+    
     okno.fill(pozadi)
     
     oznac(mapa)
+    prehod(mapa)
     zobraz_mapu(mapa)
     
     pygame.display.update()

@@ -7,8 +7,8 @@ ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 800, 600
 
 BARVA_POZADI = 0, 0, 0
 BARVA_OBJEKTU = 200, 30, 30
-BARVA_Z_SEVER = 200, 200, 255
-BARVA_Z_JIH = 255, 200, 200
+BARVA_OZNACENI_SEVER = 200, 200, 255
+BARVA_OZNACENI_JIH = 255, 200, 200
 w = 50
 h = 50
 w2 = 18
@@ -30,6 +30,8 @@ povoleni_a = False
 povoleni_d = False
 povoleni_prepnuti_s = True
 povoleni_prepnuti_j = True
+povoleni_prehozeni_s = True
+povoleni_prehozeni_j = True
 aktivni_s = mapa["vyhybky_s"]
 aktivni_j = mapa["vyhybky_j"]
 
@@ -161,24 +163,64 @@ def oznac(mapa):
         
         if aktivni_s == mapa["vyhybky_s"]:
             if objekt['vybrano'] == True:
-                pygame.draw.circle(okno, (BARVA_Z_SEVER), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150), 15)
+                pygame.draw.circle(okno, (BARVA_OZNACENI_SEVER), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150), 15)
 
     for objekt in mapa["veze_s"]:
         
         if aktivni_s == mapa["veze_s"]:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_Z_SEVER), ((objekt['pozice'][0] * 150) -9, (objekt['pozice'][1] * 150) - 15, w2, h2))
+                pygame.draw.rect(okno, (BARVA_OZNACENI_SEVER), ((objekt['pozice'][0] * 150) -9, (objekt['pozice'][1] * 150) - 15, w2, h2))
                 
     for objekt in mapa["vyhybky_j"]:
         
         if aktivni_j == mapa["vyhybky_j"]:
             if objekt['vybrano'] == True:
-                pygame.draw.circle(okno, (BARVA_Z_JIH), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150), 15)
+                pygame.draw.circle(okno, (BARVA_OZNACENI_JIH), (objekt['pozice'][0] * 150, objekt['pozice'][1] * 150), 15)
 
     for objekt in mapa["veze_j"]:
         
         if aktivni_j == mapa["veze_j"]:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_Z_JIH), ((objekt['pozice'][0] * 150) -9, (objekt['pozice'][1] * 150) - 15, w2, h2))
+                pygame.draw.rect(okno, (BARVA_OZNACENI_JIH), ((objekt['pozice'][0] * 150) -9, (objekt['pozice'][1] * 150) - 15, w2, h2))
                 
     return mapa
+
+def prehod(mapa):
+    global povoleni_prehozeni_s
+    global povoleni_prehozeni_j
+    
+    stisk = pygame.key.get_pressed()
+    
+    if stisk[pygame.K_RCTRL]:
+        if povoleni_prehozeni_s:
+            povoleni_prehozeni_s = False
+            for vec in aktivni_s:
+                if aktivni_s == mapa["vyhybky_s"]:
+                    if vec["vybrano"]:
+                        if vec["stav"] == True:
+                            vec["stav"] = False
+                        elif vec["stav"] == False:
+                            vec["stav"] = True
+                else:
+                    if vec["vybrano"]:
+                        vec["hp"] = 1
+                    
+    else:
+        povoleni_prehozeni_s = True
+        
+    if stisk[pygame.K_SPACE]:
+        if povoleni_prehozeni_j:
+            povoleni_prehozeni_j = False
+            for vec in aktivni_j:
+                if aktivni_j == mapa["vyhybky_j"]:
+                    if vec["vybrano"]:
+                        if vec["stav"] == True:
+                            vec["stav"] = False
+                        elif vec["stav"] == False:
+                            vec["stav"] = True
+                else:
+                    if vec["vybrano"]:
+                        vec["hp"] = 1
+                    
+    else:
+        povoleni_prehozeni_j = True

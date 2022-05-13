@@ -33,41 +33,47 @@ cesty = [
         ]
 
 veze_s = [
-    {"pozice":((abs(cesty[0][1][0] - cesty[0][2][0])/2) + cesty[0][1][0], (abs(cesty[0][1][1] - cesty[0][2][1])/2) + cesty[0][2][1]),"hrac":"s","hp":1,"vybrano":True}, #A
-    {"pozice":((abs(cesty[1][0][0] - cesty[1][1][0])/2) + cesty[1][0][0], (abs(cesty[1][0][1] - cesty[1][1][1])/2) + cesty[1][1][1]),"hrac":"s","hp":1,"vybrano":False}, #B
-    {"pozice":((abs(cesty[6][1][0] - cesty[6][2][0])/2) + cesty[6][1][0], (abs(cesty[6][1][1] - cesty[6][2][1])/2) + cesty[6][2][1]),"hrac":"s","hp":1,"vybrano":False}, #G
-    {"pozice":((abs(cesty[8][0][0] - cesty[8][1][0])/2) + cesty[8][0][0], (abs(cesty[8][0][1] - cesty[8][1][1])/2) + cesty[8][1][1]),"hrac":"s","hp":1,"vybrano":False}, #R
+    {"pozice":((abs(cesty[0][1][0] - cesty[0][2][0])/2) + cesty[0][1][0], (abs(cesty[0][1][1] - cesty[0][2][1])/2) + cesty[0][2][1]),"hrac":"s","hp":0,"vybrano":True}, #A
+    {"pozice":((abs(cesty[1][0][0] - cesty[1][1][0])/2) + cesty[1][0][0], (abs(cesty[1][0][1] - cesty[1][1][1])/2) + cesty[1][1][1]),"hrac":"s","hp":0,"vybrano":False}, #B
+    {"pozice":((abs(cesty[6][1][0] - cesty[6][2][0])/2) + cesty[6][1][0], (abs(cesty[6][1][1] - cesty[6][2][1])/2) + cesty[6][2][1]),"hrac":"s","hp":0,"vybrano":False}, #G
+    {"pozice":((abs(cesty[8][0][0] - cesty[8][1][0])/2) + cesty[8][0][0], (abs(cesty[8][0][1] - cesty[8][1][1])/2) + cesty[8][1][1]),"hrac":"s","hp":0,"vybrano":False}, #R
          ]
     
 veze_j = [
-    {"pozice":((abs(cesty[13][0][0] - cesty[13][1][0])/2) + cesty[13][0][0], (abs(cesty[13][0][1] - cesty[13][1][1])/2) + cesty[13][1][1]),"hrac":"j","hp":1,"vybrano":True}, #M
-    {"pozice":((abs(cesty[10][0][0] - cesty[10][1][0])/2) + cesty[10][0][0], (abs(cesty[10][0][1] - cesty[10][1][1])/2) + cesty[10][1][1]),"hrac":"j","hp":1,"vybrano":False}, #J
-    {"pozice":((abs(cesty[15][0][0] - cesty[15][1][0])/2) + cesty[15][0][0], (abs(cesty[15][0][1] - cesty[15][1][1])/2) + cesty[15][1][1]),"hrac":"j","hp":1,"vybrano":False}, #O
-    {"pozice":((abs(cesty[17][1][0] - cesty[17][2][0])/2) + cesty[17][1][0], (abs(cesty[17][1][1] - cesty[17][2][1])/2) + cesty[17][2][1]),"hrac":"j","hp":1,"vybrano":False} #Q
+    {"pozice":((abs(cesty[13][0][0] - cesty[13][1][0])/2) + cesty[13][0][0], (abs(cesty[13][0][1] - cesty[13][1][1])/2) + cesty[13][1][1]),"hrac":"j","hp":0,"vybrano":True}, #M
+    {"pozice":((abs(cesty[10][0][0] - cesty[10][1][0])/2) + cesty[10][0][0], (abs(cesty[10][0][1] - cesty[10][1][1])/2) + cesty[10][1][1]),"hrac":"j","hp":0,"vybrano":False}, #J
+    {"pozice":((abs(cesty[15][0][0] - cesty[15][1][0])/2) + cesty[15][0][0], (abs(cesty[15][0][1] - cesty[15][1][1])/2) + cesty[15][1][1]),"hrac":"j","hp":0,"vybrano":False}, #O
+    {"pozice":((abs(cesty[17][1][0] - cesty[17][2][0])/2) + cesty[17][1][0], (abs(cesty[17][1][1] - cesty[17][2][1])/2) + cesty[17][2][1]),"hrac":"j","hp":0,"vybrano":False} #Q
          ]
 
 zakladna_s = {"body":(body[6], (body[4][0] + 0.5, body[4][1]), (body[11][0] + 0.5, body[11][1]), (body[12][0], body[12][1] + 0.5), (body[13][0], body[13][1] + 0.5)),"hrac":"s"}
 brany_s = [
-    {"pozice":zakladna_s["body"][3],"stav":False},
-    {"pozice":(abs(zakladna_s["body"][3][0] - zakladna_s["body"][4][0]) + zakladna_s["body"][3][0],abs(zakladna_s["body"][3][1] - zakladna_s["body"][4][1]) + zakladna_s["body"][3][1]),"stav":False},
-    {"pozice":zakladna_s["body"][4],"stav":False}
+    {"pozice":zakladna_s["body"][2],"stav":False},
+    {"pozice":(abs(zakladna_s["body"][2][0] - zakladna_s["body"][3][0])/2 + zakladna_s["body"][2][0],abs(zakladna_s["body"][2][1] - zakladna_s["body"][3][1])/2 + zakladna_s["body"][2][1]),"stav":False},
+    {"pozice":zakladna_s["body"][3],"stav":False}
           ]
 cisla_s = [
-    {"pozice":(brany_s[0]["pozice"][0] - 0.2, brany_s[0]["pozice"][1] - 0.2),"cislo":"1"},
-    {"pozice":(brany_s[1]["pozice"][0] - 0.2, brany_s[1]["pozice"][1]),"cislo":"2"},
-    {"pozice":(brany_s[2]["pozice"][0] - 0.2, brany_s[2]["pozice"][1] + 0.2),"cislo":"3"}
+    {"pozice":(brany_s[0]["pozice"][0], brany_s[0]["pozice"][1]),"cislo":"1"},
+    {"pozice":(brany_s[1]["pozice"][0], brany_s[1]["pozice"][1]),"cislo":"2"},
+    {"pozice":(brany_s[2]["pozice"][0], brany_s[2]["pozice"][1]),"cislo":"3"}
           ]
 
 zakladna_j = {"body":(body[42], (body[43][0] + 0.5, body[43][1]), (body[36][0] + 0.5, body[36][1]), (body[29][0], body[29][1] + 0.5), (body[28][0], body[28][1] + 0.5)), "hrac":"j"}
 brany_j = [
-    {"pozice":zakladna_j["body"][3],"stav":False},
-    {"pozice":(abs(zakladna_j["body"][3][0] - zakladna_j["body"][4][0]) + zakladna_j["body"][4][0],abs(zakladna_j["body"][3][1] - zakladna_j["body"][4][1]) + zakladna_j["body"][4][1]),"stav":False},
-    {"pozice":zakladna_j["body"][4],"stav":False}
+    {"pozice":zakladna_j["body"][2],"stav":False},
+    {"pozice":(abs(zakladna_j["body"][2][0] - zakladna_j["body"][3][0])/2 + zakladna_j["body"][3][0],abs(zakladna_j["body"][2][1] - zakladna_j["body"][3][1])/2 + zakladna_j["body"][3][1]),"stav":False},
+    {"pozice":zakladna_j["body"][3],"stav":False}
           ]
 cisla_j = [
-    {"pozice":(brany_j[0]["pozice"][0] + 0.2, brany_j[0]["pozice"][1] - 0.2),"cislo":"1"},
-    {"pozice":(brany_j[1]["pozice"][0], brany_j[1]["pozice"][1] - 0.2),"cislo":"2"},
-    {"pozice":(brany_j[2]["pozice"][0] - 0.2, brany_j[2]["pozice"][1] - 0.2),"cislo":"3"}
+    {"pozice":(brany_j[0]["pozice"][0], brany_j[0]["pozice"][1]),"cislo":"1"},
+    {"pozice":(brany_j[1]["pozice"][0], brany_j[1]["pozice"][1]),"cislo":"2"},
+    {"pozice":(brany_j[2]["pozice"][0], brany_j[2]["pozice"][1]),"cislo":"3"}
           ]
 
-mapa = {"body":body,"vyhybky_s":vyhybky_s,"vyhybky_j":vyhybky_j,"cesty":cesty,"veze_s":veze_s,"veze_j":veze_j,"zakladna_s":zakladna_s,"zakladna_j":zakladna_j}
+mapa = {"body":body,
+        "vyhybky_s":vyhybky_s,"vyhybky_j":vyhybky_j,
+        "cesty":cesty,
+        "veze_s":veze_s,"veze_j":veze_j,
+        "zakladna_s":zakladna_s,"zakladna_j":zakladna_j,
+        "brany_s":brany_s,"brany_j":brany_j,
+        "cisla_s":cisla_s,"cisla_j":cisla_j}
