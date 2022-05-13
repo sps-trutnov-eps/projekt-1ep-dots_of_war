@@ -224,3 +224,30 @@ def prehod(mapa):
                     
     else:
         povoleni_prehozeni_j = True
+        
+def brany(mapa):
+    stisk = pygame.key.get_pressed()
+    if stisk[pygame.K_KP0]:
+        for x in mapa["brany_s"]:
+            x["stav"] = False
+    if stisk[pygame.K_KP1]:
+        for x in mapa["brany_s"]:
+            x["stav"] = False
+        if mapa["brany_s"][0]["stav"]:
+            mapa["brany_s"][0]["stav"] = False
+        else:
+            mapa["brany_s"][0]["stav"] = True
+    if stisk[pygame.K_KP2]:
+        for x in mapa["brany_s"]:
+            x["stav"] = False
+        if mapa["brany_s"][1]["stav"]:
+            mapa["brany_s"][1]["stav"] = False
+        else:
+            mapa["brany_s"][1]["stav"] = True
+    if stisk[pygame.K_KP3]:
+        for x in mapa["brany_s"]:
+            x["stav"] = False
+        if mapa["brany_s"][2]["stav"]:
+            mapa["brany_s"][2]["stav"] = False
+        else:
+            mapa["brany_s"][2]["stav"] = True

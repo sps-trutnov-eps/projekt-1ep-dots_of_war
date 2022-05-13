@@ -129,6 +129,7 @@ while True:
     
     oznac(mapa)
     prehod(mapa)
+    brany(mapa)
     zobraz_mapu(mapa)
     
     pygame.display.update()
