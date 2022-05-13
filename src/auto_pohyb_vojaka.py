@@ -5,43 +5,41 @@ import math
 
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1800,900
 BARVA_POZADI = 255,255,255
-#cara
-zacatek_cary = 100, ROZLISENI_Y/2
-konec_cary = ROZLISENI_X - 100, ROZLISENI_Y/2
 
+tloustka_cary = 3
 
 #cara rovne
-x_cary = 0 
-y_cary = ROZLISENI_Y - 300 
-x1_cary = 300 
-y1_cary = ROZLISENI_Y - 300
-tloustka_cary = 3
+x1_cary_rovne = 0 
+y1_cary_rovne = ROZLISENI_Y - 300 
+x2_cary_rovne = 300 
+y2_cary_rovne = ROZLISENI_Y - 300
+
 #cara dolu
-x_cary1 = 300 
-y_cary1 = ROZLISENI_Y - 300 
-x1_cary1 = 300 
-y1_cary1 = ROZLISENI_Y
+x1_cary_dolu = 300 
+y1_cary_dolu = ROZLISENI_Y - 300 
+x2_cary_dolu = 300
+y2_cary_dolu = ROZLISENI_Y
 
-#Bod 1
-bod_x1 = 300
-bod_y1 = ROZLISENI_Y - 300
+#micek
+vojak_x = 300
+vojak_y = ROZLISENI_Y - 300
 
-#Bod 2
-bod_x2 = 1800
-bod_y2 = 0
+#sikma cara
+x1_cary_sikmo = 300
+y1_cary_sikmo = ROZLISENI_Y - 300
+x2_cary_sikmo = 1800
+y2_cary_sikmo = 0
+
 
 #rychlosti
-d = 5
+v = 0.1
 #pohyb micku
-uhel_micku= math.atan2(bod_y2 - bod_y1, bod_x2 - bod_x1)
-dy = d * math.sin(uhel_micku)
-dx = d * math.cos(uhel_micku)
-
-
-
+uhel_micku = math.atan2(y2_cary_sikmo - y1_cary_sikmo, x2_cary_sikmo - x1_cary_sikmo)
+dy = v * math.sin(uhel_micku)
+dx = v * math.cos(uhel_micku)
 pygame.init()
 
-pygame.display.set_caption('Střet vojáků')
+pygame.display.set_caption('Střet vojaku')
 okno = pygame.display.set_mode(ROZLISENI_OKNA)
 
 while True:
@@ -50,17 +48,27 @@ while True:
         if u.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if u.type == pygame.KEYDOWN and u.key == pygame.K_ESCAPE:
+            pygame.quit()
+            sys.exit()
         if u.type == pygame.MOUSEWHEEL:
             if u.y < 0:
                 pygame.display.iconify()
-              
-        
+                
+    #if vojak_x <= x2_cary_sikmo:
+    vojak_x += dx
+    #if vojak_y >= y2_cary_sikmo:
+    vojak_y += dy
+   
+    
+    
+     
     okno.fill(BARVA_POZADI)
     
-    pygame.draw.line(okno, (0,0,0), (300, ROZLISENI_Y - 300), (1800,0), (tloustka_cary))
-    pygame.draw.line(okno,(0,0,0),(x_cary,y_cary),(x1_cary,y1_cary),tloustka_cary) 
-    pygame.draw.line(okno,(0,0,0),(x_cary1,y_cary1),(x1_cary1,y1_cary1),tloustka_cary)
-    vojak = pygame.draw.circle(okno,(255,0,0),(bod_x1, bod_y1), 5)
+    pygame.draw.line(okno, (0,0,0), (x1_cary_sikmo, y1_cary_sikmo), (x2_cary_sikmo, y2_cary_sikmo), (tloustka_cary))
+    pygame.draw.line(okno,(0,0,0),(x1_cary_rovne,y1_cary_rovne),(x2_cary_rovne,y2_cary_rovne),tloustka_cary) 
+    pygame.draw.line(okno,(0,0,0),(x1_cary_dolu,y1_cary_dolu),(x2_cary_dolu,y2_cary_dolu),tloustka_cary)
+    pygame.draw.circle(okno,(255,0,0),(vojak_x, vojak_y), 5)
     
     
     pygame.display.update()
