@@ -8,7 +8,7 @@ BARVA_POZADI = 255,255,255
 
 #hodnota pro čas, nepřepisovat.
 bod_v_case = pygame.time.get_ticks()
-
+bod2_v_case = pygame.time.get_ticks()
 #velikost míčků == rad, velikost čár == w.
 rad = 5
 w = 5
@@ -37,6 +37,7 @@ bod3_y, bod4_y = min(bod3_y, bod4_y), max(bod3_y, bod4_y)
 #pohyb, neboli základní hodnoty pro pohyb. nepřepisovat, pokud tomu nerozumíš.
 hledani_x = []
 chozeni_x = -1
+chodici_vojaci = []
 
 #začáteční hodnoty pro spawn vojáků. nepřepisovat, pokud tomu nerozumíš.
 pocatecni_pocet_vojaku = 1
@@ -76,30 +77,13 @@ while True:
                        if brana == True:
                            brana = False
                        elif brana == False:
-                           if chozeni_x < len(seznam_vojaku):
-                            chozeni_x += 1
-                            hledani_x.append(chozeni_x)
-                           brana = True
-                            
-                       else:
-                            chozeni_x = chozeni_x
-                    
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_c:
-                       if brana == True:
-                           brana = False
-                       elif brana == False:
-                            if chozeni_x + 30 < len(seznam_vojaku):
-                             for i in range(30):
-                              chozeni_x += 1
-                              hledani_x.append(chozeni_x)
-                            brana = True
-                            
+                           brana = True 
                        else:
                             chozeni_x = chozeni_x
     #hodnoty, které se tu potřebují načíst, aby fungoval časovač a pod.                              
     cas_ted = pygame.time.get_ticks()
     od_minula_ms = cas_ted - bod_v_case
+    od_minula2_ms = cas_ted - bod2_v_case
     #spawn vojáků, taky se potřebuje načíst, aby fungoval spawn jak má. 
     vojak_x = random.randint(bod3_x,bod4_x-rad)
     vojak_y = random.randint(bod3_y+rad,bod4_y)
@@ -109,8 +93,16 @@ while True:
         seznam_vojaku.append(vojak)
         bod_v_case = cas_ted
         
-    
-      
+    if od_minula2_ms > 800 and brana == True:
+            chozeni_x += 1
+            hledani_x.append(chozeni_x)
+            seznam_vojaku[0][0] = bod1_x
+            seznam_vojaku[0][1] = bod1_y
+            chodici_vojaci.append(seznam_vojaku[0])
+            seznam_vojaku = seznam_vojaku[0:]
+            bod2_v_case = cas_ted
+    elif od_minula2_ms > 800 and brana == False:
+         bod2_v_case = cas_ted
         
     okno.fill(BARVA_POZADI)
     
@@ -121,17 +113,13 @@ while True:
     #pohyb ze spawnu do 1 bodu, a následně do bodu dalšího.
     for x_1 in hledani_x:
      #pohyb_x prvniho vojaka, a následně následujícího.
-        if chozeni_x < len(seznam_vojaku):
-            a = math.atan2(bod2_y - seznam_vojaku[x_1][1],bod2_x - seznam_vojaku[x_1][0])
-            b = math.atan2( bod1_y - seznam_vojaku[x_1][1], bod1_x - seznam_vojaku[x_1][0]) 
-            if seznam_vojaku[x_1][0] <= bod1_x and seznam_vojaku[x_1][1] >= bod1_y:
-                seznam_vojaku[x_1][0] += 0.5 * math.cos(b)
-                seznam_vojaku[x_1][1] += 0.5 * math.sin(b)
-                
-            else:
-                seznam_vojaku[x_1][0] += 0.5 * math.cos(a)
-                seznam_vojaku[x_1][1] += 0.5 * math.sin(a)
-            
+        
+        if chozeni_x < len(chodici_vojaci) and brana == True:
+            a = math.atan2(bod2_y - chodici_vojaci[x_1][1],bod2_x - chodici_vojaci[x_1][0])
+            b = math.atan2( bod1_y - chodici_vojaci[x_1][1], bod1_x - chodici_vojaci[x_1][0]) 
+            if brana == True:
+                chodici_vojaci[x_1][0] += 0.5 * math.cos(a)
+                chodici_vojaci[x_1][1] += 0.5 * math.sin(a)
                 
                 
         else:
@@ -145,15 +133,7 @@ while True:
         if x1 < bod1_x - 101 and x1 > bod1_x - 199:
             x1 += 0.2
             y2 -= 0.2
-        
-    #jen text, do def se mi nechtěl dávat, jelikož by to bylo více nepřehledné nahoře.
-    font = pygame.font.Font('freesansbold.ttf', 25)
-    pocet_vojaku_na_ceste = font.render('útočící_vojáci: ' + str(len(hledani_x)), True, (0,0,8))
-    okno.blit(pocet_vojaku_na_ceste, (10, 50))
     
-    pocet_vojaku_k_dispozici = int(len(seznam_vojaku) - int(len(hledani_x)))
-    pocet_vojaku = font.render('vojáci_k_dispozici: ' + str(pocet_vojaku_k_dispozici), True, (0,0,8))
-    okno.blit(pocet_vojaku, (10, 10))
     
     #vykreslovani základny a pod.
     pygame.draw.line(okno,(0,0,0),(0,bod3_y),(bod4_x-100,bod3_y),w)
