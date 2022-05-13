@@ -12,6 +12,7 @@ bod_v_case = pygame.time.get_ticks()
 #velikost míčků == rad, velikost čár == w.
 rad = 5
 w = 5
+w1 = 15
 
 #Bod 1 bod, kam míček jde jako první.
 bod1_y = ROZLISENI_Y - ROZLISENI_Y/3
@@ -41,7 +42,17 @@ chozeni_x = -1
 pocatecni_pocet_vojaku = 1
 seznam_vojaku = []
 
+#brána, která se otevírá
+brana = False
+x1 = bod4_x-100
+y1 = bod3_y-12
+h1 = 14
+w1 = 100
 
+x2 = bod1_x -2
+y2 = bod1_y
+h2 = 100
+w2 = 14
 #spawn prvního vojáka. nepřepisovat, pokud tomu nerozumíš.
 for nabor in range(pocatecni_pocet_vojaku):
     vojak = [random.randint(bod3_x,bod4_x),random.randint(bod3_y,bod4_y)]
@@ -62,19 +73,28 @@ while True:
                     quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                       if chozeni_x < len(seznam_vojaku):
+                       if brana == True:
+                           brana = False
+                       elif brana == False:
+                           if chozeni_x < len(seznam_vojaku):
                             chozeni_x += 1
                             hledani_x.append(chozeni_x)
-                        
+                           brana = True
+                            
                        else:
                             chozeni_x = chozeni_x
                     
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_c:
-                       if chozeni_x + 30 < len(seznam_vojaku):
-                         for i in range(30):
-                            chozeni_x += 1
-                            hledani_x.append(chozeni_x)        
+                       if brana == True:
+                           brana = False
+                       elif brana == False:
+                            if chozeni_x + 30 < len(seznam_vojaku):
+                             for i in range(30):
+                              chozeni_x += 1
+                              hledani_x.append(chozeni_x)
+                            brana = True
+                            
                        else:
                             chozeni_x = chozeni_x
     #hodnoty, které se tu potřebují načíst, aby fungoval časovač a pod.                              
@@ -107,6 +127,7 @@ while True:
             if seznam_vojaku[x_1][0] <= bod1_x and seznam_vojaku[x_1][1] >= bod1_y:
                 seznam_vojaku[x_1][0] += 0.5 * math.cos(b)
                 seznam_vojaku[x_1][1] += 0.5 * math.sin(b)
+                
             else:
                 seznam_vojaku[x_1][0] += 0.5 * math.cos(a)
                 seznam_vojaku[x_1][1] += 0.5 * math.sin(a)
@@ -116,6 +137,15 @@ while True:
         else:
             chozeni_x = chozeni_x
     
+    if brana == True:
+        if x1 < bod1_x - 99 and x1 > bod1_x - 198 :
+            x1 -= 0.2
+            y2 += 0.2
+    if brana == False:
+        if x1 < bod1_x - 101 and x1 > bod1_x - 199:
+            x1 += 0.2
+            y2 -= 0.2
+        
     #jen text, do def se mi nechtěl dávat, jelikož by to bylo více nepřehledné nahoře.
     font = pygame.font.Font('freesansbold.ttf', 25)
     pocet_vojaku_na_ceste = font.render('útočící_vojáci: ' + str(len(hledani_x)), True, (0,0,8))
@@ -126,9 +156,11 @@ while True:
     okno.blit(pocet_vojaku, (10, 10))
     
     #vykreslovani základny a pod.
-    pygame.draw.line(okno,(0,0,0),(0,bod3_y),(bod4_x,bod3_y),w)
-    pygame.draw.line(okno,(0,0,0),(bod4_x,bod3_y),(bod4_x,ROZLISENI_Y),w)
+    pygame.draw.line(okno,(0,0,0),(0,bod3_y),(bod4_x-100,bod3_y),w)
+    pygame.draw.line(okno,(0,0,0),(bod4_x,bod3_y+100),(bod4_x,ROZLISENI_Y),w)
     pygame.draw.line(okno,(0,0,0),(bod1_x,bod1_y),(bod2_x,bod2_y),w)  
-    
+    pygame.draw.rect(okno, (0,0,0), (x1, y1, w1, h1))
+    pygame.draw.rect(okno, (0,0,0), (x2, y2, w2, h2))
     #display update :D
     pygame.display.update()
+    
