@@ -227,6 +227,7 @@ def prehod(mapa):
         
 def brany(mapa):
     stisk = pygame.key.get_pressed()
+    #Sever
     if stisk[pygame.K_KP0]:
         for x in mapa["brany_s"]:
             x["stav"] = False
@@ -251,3 +252,29 @@ def brany(mapa):
             mapa["brany_s"][2]["stav"] = False
         else:
             mapa["brany_s"][2]["stav"] = True
+    
+    #Jih
+    if stisk[pygame.K_SEMICOLON]:
+        for x in mapa["brany_j"]:
+            x["stav"] = False
+    if stisk[pygame.K_1]:
+        for x in mapa["brany_j"]:
+            x["stav"] = False
+        if mapa["brany_j"][0]["stav"]:
+            mapa["brany_j"][0]["stav"] = False
+        else:
+            mapa["brany_j"][0]["stav"] = True
+    if stisk[pygame.K_2]:
+        for x in mapa["brany_j"]:
+            x["stav"] = False
+        if mapa["brany_j"][1]["stav"]:
+            mapa["brany_j"][1]["stav"] = False
+        else:
+            mapa["brany_j"][1]["stav"] = True
+    if stisk[pygame.K_3]:
+        for x in mapa["brany_j"]:
+            x["stav"] = False
+        if mapa["brany_j"][2]["stav"]:
+            mapa["brany_j"][2]["stav"] = False
+        else:
+            mapa["brany_j"][2]["stav"] = True

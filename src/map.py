@@ -50,7 +50,7 @@ zakladna_s = {"body":(body[6], (body[4][0] + 0.5, body[4][1]), (body[11][0] + 0.
 brany_s = [
     {"pozice":zakladna_s["body"][2],"stav":False},
     {"pozice":(abs(zakladna_s["body"][2][0] - zakladna_s["body"][3][0])/2 + zakladna_s["body"][2][0],abs(zakladna_s["body"][2][1] - zakladna_s["body"][3][1])/2 + zakladna_s["body"][2][1]),"stav":False},
-    {"pozice":zakladna_s["body"][3],"stav":True}
+    {"pozice":zakladna_s["body"][3],"stav":False}
           ]
 cisla_s = [
     {"pozice":(brany_s[0]["pozice"][0], brany_s[0]["pozice"][1]),"cislo":"1"},
@@ -60,7 +60,7 @@ cisla_s = [
 
 zakladna_j = {"body":(body[42], (body[43][0] + 0.5, body[43][1]), (body[36][0] + 0.5, body[36][1]), (body[29][0], body[29][1] + 0.5), (body[28][0], body[28][1] + 0.5)), "hrac":"j"}
 brany_j = [
-    {"pozice":zakladna_j["body"][3],"stav":True},
+    {"pozice":zakladna_j["body"][3],"stav":False},
     {"pozice":(abs(zakladna_j["body"][2][0] - zakladna_j["body"][3][0])/2 + zakladna_j["body"][3][0],abs(zakladna_j["body"][2][1] - zakladna_j["body"][3][1])/2 + zakladna_j["body"][3][1]),"stav":False},
     {"pozice":zakladna_j["body"][2],"stav":False}
           ]
