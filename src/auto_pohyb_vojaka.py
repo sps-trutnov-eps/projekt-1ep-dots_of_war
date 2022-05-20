@@ -100,9 +100,10 @@ while True:
             
     doba_od_posledniho_pohybu_vojaku_na_ceste = pygame.time.get_ticks() - cas_od_posledniho_pohybu_vojaku_na_ceste
     
-    if doba_od_posledniho_pohybu_vojaku_na_ceste > 500:
+    if doba_od_posledniho_pohybu_vojaku_na_ceste > 5:
         for v in seznam_vojaku_na_ceste:
-            v[0] += 25
+            if v[0] < konecna_pozice_cary_XY[0]: 
+                v[0] += 0.25
             
  
         cas_od_posledniho_pohybu_vojaku_na_ceste = pygame.time.get_ticks()
