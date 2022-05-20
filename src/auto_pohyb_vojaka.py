@@ -38,6 +38,7 @@ bod3_y, bod4_y = min(bod3_y, bod4_y), max(bod3_y, bod4_y)
 hledani_x = []
 chozeni_x = -1
 chodici_vojaci = []
+chozeni = True
 
 #začáteční hodnoty pro spawn vojáků. nepřepisovat, pokud tomu nerozumíš.
 pocatecni_pocet_vojaku = 1
@@ -96,11 +97,11 @@ while True:
     if od_minula2_ms > 800 and brana == True:
             chozeni_x += 1
             hledani_x.append(chozeni_x)
-            seznam_vojaku[0][0] = bod1_x
-            seznam_vojaku[0][1] = bod1_y
-            chodici_vojaci.append(seznam_vojaku[0])
-            seznam_vojaku = seznam_vojaku[0:]
+            seznam_vojaku = seznam_vojaku[1:]
+            vojak_pochodovy = [bod1_x, bod3_y]
+            chodici_vojaci.append(vojak_pochodovy)
             bod2_v_case = cas_ted
+           
     elif od_minula2_ms > 800 and brana == False:
          bod2_v_case = cas_ted
         
@@ -110,16 +111,18 @@ while True:
     for v in seznam_vojaku:
         pygame.draw.circle(okno,(255,8,0),v,rad)
     
+    for v_p in chodici_vojaci:
+        pygame.draw.circle(okno,(255,8,0),v_p,rad)
+    
     #pohyb ze spawnu do 1 bodu, a následně do bodu dalšího.
     for x_1 in hledani_x:
      #pohyb_x prvniho vojaka, a následně následujícího.
         
-        if chozeni_x < len(chodici_vojaci) and brana == True:
+        if chozeni:
             a = math.atan2(bod2_y - chodici_vojaci[x_1][1],bod2_x - chodici_vojaci[x_1][0])
             b = math.atan2( bod1_y - chodici_vojaci[x_1][1], bod1_x - chodici_vojaci[x_1][0]) 
-            if brana == True:
-                chodici_vojaci[x_1][0] += 0.5 * math.cos(a)
-                chodici_vojaci[x_1][1] += 0.5 * math.sin(a)
+            chodici_vojaci[x_1][0] += 0.5 *math.cos(a)
+            chodici_vojaci[x_1][1] += 0.5 *math.sin(a)
                 
                 
         else:
@@ -136,7 +139,7 @@ while True:
     
     
     #vykreslovani základny a pod.
-    pygame.draw.line(okno,(0,0,0),(0,bod3_y),(bod4_x-100,bod3_y),w)
+    pygame.draw.line(okno,(0,0,0),(0,bod3_y-1),(bod4_x-100,bod3_y-1),w)
     pygame.draw.line(okno,(0,0,0),(bod4_x,bod3_y+100),(bod4_x,ROZLISENI_Y),w)
     pygame.draw.line(okno,(0,0,0),(bod1_x,bod1_y),(bod2_x,bod2_y),w)  
     pygame.draw.rect(okno, (0,0,0), (x1, y1, w1, h1))
