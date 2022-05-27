@@ -2,6 +2,7 @@ import pygame
 import sys
 from map import mapa
 from prepinani_mezi_objekty import *
+from auto_pohyb_vojaka import *
 
 pozadi = 20,150,20
 rozliseni = rozliseni_x, rozliseni_y = 900, 900
@@ -13,6 +14,18 @@ pygame.display.set_caption("Dots of War")
 okno = pygame.display.set_mode(rozliseni)
 hodinky = pygame.time.Clock()
 font = pygame.font.SysFont("oldenglishtext.ttf", 24)
+
+spawn = pygame.USEREVENT + 0
+pustit = pygame.USEREVENT + 1
+pohyb = pygame.USEREVENT + 2
+casovac_spawn = pygame.time.set_timer(spawn,1000)
+casovac_pustit = pygame.time.set_timer(pustit,500)
+casovac_pohyb = pygame.time.set_timer(pohyb,5)
+
+seznam_vojaku_s = []
+seznam_na_ceste_s = []
+seznam_vojaku_j = []
+seznam_na_ceste_j = []
     
 def zobraz_mapu(mapa):
     for cesta in mapa["cesty"]:
@@ -118,6 +131,12 @@ while True:
         if udalost.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if udalost.type == casovac_spawn:
+            spawni(seznam_vojaku_s, mapa)
+            spawni(seznam_vojaku_j, mapa)
+        if udalost.type == casovac_pustit:
+            pust(mapa, seznam_vojaku_s, seznam_na_ceste_s)
+            pust(mapa, seznam_vojaku_j, seznam_na_ceste_j)
     
     stisk = pygame.key.get_pressed()
     
@@ -131,6 +150,7 @@ while True:
     prehod(mapa)
     brany(mapa)
     zobraz_mapu(mapa)
+    #akce_vojaku()
     
     pygame.display.update()
     hodinky.tick(60)
