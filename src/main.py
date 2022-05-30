@@ -15,10 +15,10 @@ okno = pygame.display.set_mode(rozliseni)
 hodinky = pygame.time.Clock()
 font = pygame.font.SysFont("oldenglishtext.ttf", 24)
 
-spawn = pygame.USEREVENT + 0
-pustit = pygame.USEREVENT + 1
-pohyb = pygame.USEREVENT + 2
-casovac_spawn = pygame.time.set_timer(spawn,1000)
+spawn = pygame.USEREVENT+0
+pustit = pygame.USEREVENT+1
+pohyb = pygame.USEREVENT+2
+casovac_spawn = pygame.time.set_timer(spawn,50)
 casovac_pustit = pygame.time.set_timer(pustit,500)
 casovac_pohyb = pygame.time.set_timer(pohyb,5)
 
@@ -107,6 +107,12 @@ def zobraz_mapu(mapa):
     pygame.draw.polygon(okno, pozadi, body_j)
     pygame.draw.polygon(okno, (255,0,0), body_j, 5)
     
+    for vojak in seznam_vojaku_s:
+        pygame.draw.circle(okno, (0,0,255), (vojak[0], vojak[1]), 5)
+        
+    for vojak in seznam_vojaku_j:
+        pygame.draw.circle(okno, (255,0,0), (vojak[0], vojak[1]), 5)
+    
     for i, cislo in enumerate(mapa["cisla_s"]):
         if mapa["brany_s"][i]["stav"]:
             pygame.draw.circle(okno, BARVA_OZNACENI_SEVER, (mapa["brany_s"][i]["pozice"][0] * 150,mapa["brany_s"][i]["pozice"][1] * 150), 15)
@@ -131,12 +137,12 @@ while True:
         if udalost.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if udalost.type == casovac_spawn:
-            spawni(seznam_vojaku_s, mapa)
-            spawni(seznam_vojaku_j, mapa)
-        if udalost.type == casovac_pustit:
-            pust(mapa, seznam_vojaku_s, seznam_na_ceste_s)
-            pust(mapa, seznam_vojaku_j, seznam_na_ceste_j)
+        if udalost.type == spawn:
+            spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
+            spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
+        if udalost.type == pustit:
+            pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
+            pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
     
     stisk = pygame.key.get_pressed()
     
@@ -150,7 +156,6 @@ while True:
     prehod(mapa)
     brany(mapa)
     zobraz_mapu(mapa)
-    #akce_vojaku()
     
     pygame.display.update()
     hodinky.tick(60)

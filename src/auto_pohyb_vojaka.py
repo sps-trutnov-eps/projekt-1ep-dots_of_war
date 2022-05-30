@@ -41,28 +41,25 @@ pocatecni_pocet_vojaku = 1
 seznam_vojaku = []
 seznam_vojaku_na_ceste = []
 
-def spawni(seznam_vojaku, mapa):
-    if seznam_vojaku == seznam_vojaku_s:
-        zakladna = mapa["zakladna_s"]
-    elif seznam_vojaku == seznam_vojaku_j:
-        zakladna = mapa["zakladna_j"]
-    
+def spawni(seznam_vojaku, mapa, zakladna):
     rameno = 75 + 7.07
     x = y = 0
     while (x + y) < rameno:
         x = random.randint(5, 220)
         y = random.randint(5, 220)
         
+    if zakladna == mapa["zakladna_s"]:
+        x += 675
+        y = (75 - y) + 150
+    elif zakladna == mapa["zakladna_j"]:
+        y += 675
+        x = (75 - x) + 150
+        
     vojak = [x, y]
     seznam_vojaku.append(vojak)
     return seznam_vojaku
     
-def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste):
-    if seznam_vojaku == seznam_vojaku_s:
-        brany = mapa["brany_s"]
-    elif seznam_vojaku == seznam_vojaku_j:
-        brany = mapa["brany_j"]
-        
+def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste, brany):
     for brana in brany:
         if brana["stav"] == True:
             vojak_nove_na_ceste = seznam_vojaku.pop()
@@ -72,7 +69,7 @@ def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste):
         else:
             pass
     
-        ####### Pohyb vojáků #######
+"""        ####### Pohyb vojáků #######
     if doba_od_posledniho_pohybu_vojaku_na_ceste > 5:
         for v in seznam_vojaku_na_ceste:
             uhel = math.atan2((konecna_pozice_cary_XY[1] - v[1]),(konecna_pozice_cary_XY[0] - v[0]))
@@ -97,4 +94,4 @@ def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste):
     for v in seznam_vojaku_na_ceste:
         pygame.draw.circle(okno,(255,8,0),v,5)
         
-    pygame.display.update()
+    pygame.display.update()"""
