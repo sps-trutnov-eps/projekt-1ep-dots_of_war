@@ -19,7 +19,7 @@ spawn = pygame.USEREVENT+0
 pustit = pygame.USEREVENT+1
 pohyb = pygame.USEREVENT+2
 casovac_spawn = pygame.time.set_timer(spawn,50)
-casovac_pustit = pygame.time.set_timer(pustit,500)
+casovac_pustit = pygame.time.set_timer(pustit,10)
 casovac_pohyb = pygame.time.set_timer(pohyb,5)
 
 seznam_vojaku_s = []
@@ -108,10 +108,10 @@ def zobraz_mapu(mapa):
     pygame.draw.polygon(okno, (255,0,0), body_j, 5)
     
     for vojak in seznam_vojaku_s:
-        pygame.draw.circle(okno, (0,0,255), (vojak[0], vojak[1]), 5)
+        pygame.draw.circle(okno, (0,0,185), (vojak[0], vojak[1]), 5)
         
     for vojak in seznam_vojaku_j:
-        pygame.draw.circle(okno, (255,0,0), (vojak[0], vojak[1]), 5)
+        pygame.draw.circle(okno, (185,0,0), (vojak[0], vojak[1]), 5)
     
     for i, cislo in enumerate(mapa["cisla_s"]):
         if mapa["brany_s"][i]["stav"]:
@@ -130,6 +130,12 @@ def zobraz_mapu(mapa):
         napis = text.get_rect()
         napis.center = (cislo["pozice"][0] * 150, cislo["pozice"][1] * 150)
         okno.blit(text, napis)
+        
+    for vojak in seznam_na_ceste_s:
+        pygame.draw.circle(okno, (0,0,185), (vojak[0], vojak[1]), 5)
+        
+    for vojak in seznam_na_ceste_j:
+        pygame.draw.circle(okno, (185,0,0), (vojak[0], vojak[1]), 5)
 
 while True:
     udalosti = pygame.event.get()

@@ -62,21 +62,24 @@ def spawni(seznam_vojaku, mapa, zakladna):
 def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste, brany):
     for brana in brany:
         if brana["stav"] == True:
-            vojak_nove_na_ceste = seznam_vojaku.pop()
-            seznam_vojaku_na_ceste.append(vojak_nove_na_ceste)
-            vojak_nove_na_ceste[0], vojak_nove_na_ceste[1] = startovni_pozice_cary_XY
+            if seznam_vojaku != []:
+                vojak_nove_na_ceste = seznam_vojaku.pop()
+                seznam_vojaku_na_ceste.append(vojak_nove_na_ceste)
+                vojak_nove_na_ceste[0], vojak_nove_na_ceste[1] = brana["pozice"][0], brana["pozice"][1]
+            else:
+                pass
             return seznam_vojaku, seznam_vojaku_na_ceste
         else:
             pass
     
-"""        ####### Pohyb vojáků #######
-    if doba_od_posledniho_pohybu_vojaku_na_ceste > 5:
-        for v in seznam_vojaku_na_ceste:
-            uhel = math.atan2((konecna_pozice_cary_XY[1] - v[1]),(konecna_pozice_cary_XY[0] - v[0]))
-            posun_x = math.cos(uhel) * 0.25
-            posun_y = math.sin(uhel) * 0.25
-            v[0] += posun_x
-            v[1] += posun_y
+        ####### Pohyb vojáků #######
+"""def pohyb():
+    for v in seznam_vojaku_na_ceste:
+        uhel = math.atan2((konecna_pozice_cary_XY[1] - v[1]),(konecna_pozice_cary_XY[0] - v[0]))
+        posun_x = math.cos(uhel) * 0.25
+        posun_y = math.sin(uhel) * 0.25
+        v[0] += posun_x
+        v[1] += posun_y
             
  
         cas_od_posledniho_pohybu_vojaku_na_ceste = pygame.time.get_ticks()
