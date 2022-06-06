@@ -5,3 +5,4 @@
 **Struktura repozitáře**
 - `src` zdrojové soubory v Pythonu
 - `doc` dokumentace, návody, pomůcky
+- `work` work-in-progress, náčrtky apod.
