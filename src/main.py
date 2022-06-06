@@ -132,10 +132,10 @@ def zobraz_mapu(mapa):
         okno.blit(text, napis)
         
     for vojak in seznam_na_ceste_s:
-        pygame.draw.circle(okno, (0,0,185), (vojak[0], vojak[1]), 5)
+        pygame.draw.circle(okno, (0,0,185), (vojak[0]*150, vojak[1]*150), 5)
         
     for vojak in seznam_na_ceste_j:
-        pygame.draw.circle(okno, (185,0,0), (vojak[0], vojak[1]), 5)
+        pygame.draw.circle(okno, (185,0,0), (vojak[0]*150, vojak[1]*150), 5)
 
 while True:
     udalosti = pygame.event.get()

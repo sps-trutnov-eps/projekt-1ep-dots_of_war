@@ -50,8 +50,8 @@ def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste, brany):
 def pohni(seznam_vojaku_na_ceste):
     for v in seznam_vojaku_na_ceste:
         uhel = math.atan2((v[2][1] - v[1]),(v[2][0] - v[0]))
-        posun_x = math.cos(uhel) * 0.25
-        posun_y = math.sin(uhel) * 0.25
+        posun_x = math.cos(uhel) * 0.01
+        posun_y = math.sin(uhel) * 0.01
         v[0] += posun_x
         v[1] += posun_y
     return seznam_vojaku_na_ceste
