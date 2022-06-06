@@ -18,8 +18,8 @@ font = pygame.font.SysFont("oldenglishtext.ttf", 24)
 spawn = pygame.USEREVENT+0
 pustit = pygame.USEREVENT+1
 pohyb = pygame.USEREVENT+2
-casovac_spawn = pygame.time.set_timer(spawn,50)
-casovac_pustit = pygame.time.set_timer(pustit,10)
+casovac_spawn = pygame.time.set_timer(spawn,100)
+casovac_pustit = pygame.time.set_timer(pustit,50)
 casovac_pohyb = pygame.time.set_timer(pohyb,5)
 
 seznam_vojaku_s = []
@@ -149,6 +149,9 @@ while True:
         if udalost.type == pustit:
             pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
             pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
+        if udalost.type == pohyb:
+            pohni(seznam_na_ceste_s)
+            pohni(seznam_na_ceste_j)
     
     stisk = pygame.key.get_pressed()
     
