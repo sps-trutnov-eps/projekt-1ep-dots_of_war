@@ -49,26 +49,26 @@ def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste, brany):
 
 def rozhodni_cestu(mapa, vojak, strana):
     if strana == "s":
-         for brana in mapa["brany_s"]:
-             if round(vojak[0]) == brana["pozice"][0] and round(vojak[1]) == brana["pozice"][1]:
-                if brana["stav"]:
-                     smer == brana["rozcesti"][1]
-                else:
-                     smer == brana["rozcesti"][0]
-                
-                for i, bod in enumerate(mapa["body"]):
+         for vyhybka in mapa["vyhybky_s"]:
+             if round(vojak[0]) == vyhybka["pozice"][0] and round(vojak[1]) == vyhybka["pozice"][1]:
+                 if vyhybka["stav"] == True:
+                     smer = vyhybka["rozcesti"][1]
+                 else:
+                     smer = vyhybka["rozcesti"][0]
+                 
+                 for i, bod in enumerate(mapa["body"]):
                     if bod == vojak[2]:
                         momentalni_bod = i
                         break
                 
-                if smer == "Z":
+                 if smer == "Z":
                     vojak[2] = mapa["body"][momentalni_bod-1]
-                elif smer == "JZ":
+                 elif smer == "JZ":
                     vojak[2] = mapa["body"][momentalni_bod+6]
-                elif smer == "J":
+                 elif smer == "J":
                     vojak[2] = mapa["body"][momentalni_bod+7]
                     
-                return vojak
+                 return vojak
 
 def pohni(mapa, seznam_vojaku_na_ceste, strana):
     for v in seznam_vojaku_na_ceste:
