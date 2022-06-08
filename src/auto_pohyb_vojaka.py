@@ -47,34 +47,33 @@ def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste, brany):
         else:
             pass
 
-def rozhodni_cestu(mapa, vojak, seznam):
-    if seznam == seznam_na_ceste_s:
-        if vojak in seznam:
-             for brana in mapa["brany_s"]:
-                 if round(vojak[0]) == brana["pozice"][0] and round(vojak[1]) == brana["pozice"][1]:
-                    if brana["stav"]:
-                         smer == brana["rozcesti"][1]
-                    else:
-                         smer == brana["rozcesti"][0]
+def rozhodni_cestu(mapa, vojak, strana):
+    if strana == "s":
+         for brana in mapa["brany_s"]:
+             if round(vojak[0]) == brana["pozice"][0] and round(vojak[1]) == brana["pozice"][1]:
+                if brana["stav"]:
+                     smer == brana["rozcesti"][1]
+                else:
+                     smer == brana["rozcesti"][0]
+                
+                for i, bod in enumerate(mapa["body"]):
+                    if bod == vojak[2]:
+                        momentalni_bod = i
+                        break
+                
+                if smer == "Z":
+                    vojak[2] = mapa["body"][momentalni_bod-1]
+                elif smer == "JZ":
+                    vojak[2] = mapa["body"][momentalni_bod+6]
+                elif smer == "J":
+                    vojak[2] = mapa["body"][momentalni_bod+7]
                     
-                    for i, bod in enumerate(mapa["body"]):
-                        if bod == vojak[2]:
-                            momentalni_bod = i
-                            break
-                    
-                    if smer == "Z":
-                        vojak[2] = mapa["body"][momentalni_bod-1]
-                    elif smer == "JZ":
-                        vojak[2] = mapa["body"][momentalni_bod+6]
-                    elif smer == "J":
-                        vojak[2] = mapa["body"][momentalni_bod+7]
-                        
-                    return vojak
+                return vojak
 
-def pohni(mapa, seznam_vojaku_na_ceste):
+def pohni(mapa, seznam_vojaku_na_ceste, strana):
     for v in seznam_vojaku_na_ceste:
         if v[2][0] == round(v[0], 2) and v[2][1] == round(v[1], 2):
-            rozhodni_cestu(mapa, v, seznam_vojaku_na_ceste)
+            rozhodni_cestu(mapa, v, strana)
         else:
             uhel = math.atan2((v[2][1] - v[1]),(v[2][0] - v[0]))
             posun_x = math.cos(uhel) * 0.01

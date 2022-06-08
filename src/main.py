@@ -150,8 +150,8 @@ while True:
             pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
             pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
         if udalost.type == pohyb:
-            pohni(mapa, seznam_na_ceste_s)
-            pohni(mapa, seznam_na_ceste_j)
+            pohni(mapa, seznam_na_ceste_s, "s")
+            pohni(mapa, seznam_na_ceste_j, "j")
     
     stisk = pygame.key.get_pressed()
     
