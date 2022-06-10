@@ -71,6 +71,39 @@ def rozhodni_cestu(mapa, vojak, strana):
                 
                 trasa = "mám"
                 return vojak
+            
+        for vyhybka in mapa["vyhybky_j"]:
+            if round(vojak[0]) == vyhybka["pozice"][0] and round(vojak[1]) == vyhybka["pozice"][1]:
+                cesta1 = None
+                cesta2 = None
+                cesta3 = None
+                for cesta in mapa["cesty"]:
+                    if vyhybka["pozice"] in cesta:
+                        if cesta1 == None:
+                            cesta1 = cesta
+                        elif cesta1 != None and cesta2 == None:
+                            cesta2 = cesta
+                        elif cesta1 != None and cesta2 != None and cesta3 == None:
+                            cesta3 = cesta
+                            break
+                
+                cislovane_cesty = [cesta1, cesta2, cesta3]
+                
+                cislo_vyhybky = None
+                
+                for i, bod in enumerate(mapa["body"]):
+                    if bod == vyhybka["pozice"]:
+                        cislo_vyhybky = i
+                        break
+                
+                for cesta in cislovane_cesty:
+                    for bod in cesta:
+                        if bod == mapa["body"][cislo_vyhybky-1] or bod == mapa["body"][cislo_vyhybky+6] or bod == mapa["body"][cislo_vyhybky+7]:
+                            vojak[2] = bod
+                            break
+                        
+                trasa = "mám"
+                return vojak
         
         if trasa == None:
             vojakova_cesta = "není"
