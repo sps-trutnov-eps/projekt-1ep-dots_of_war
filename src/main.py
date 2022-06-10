@@ -2,6 +2,7 @@ import pygame
 import sys
 from map import mapa
 from prepinani_mezi_objekty import *
+from auto_pohyb_vojaka import *
 
 pozadi = 20,150,20
 rozliseni = rozliseni_x, rozliseni_y = 900, 900
@@ -13,6 +14,18 @@ pygame.display.set_caption("Dots of War")
 okno = pygame.display.set_mode(rozliseni)
 hodinky = pygame.time.Clock()
 font = pygame.font.SysFont("oldenglishtext.ttf", 24)
+
+spawn = pygame.USEREVENT+0
+pustit = pygame.USEREVENT+1
+pohyb = pygame.USEREVENT+2
+casovac_spawn = pygame.time.set_timer(spawn,200)
+casovac_pustit = pygame.time.set_timer(pustit,100)
+casovac_pohyb = pygame.time.set_timer(pohyb,10)
+
+seznam_vojaku_s = []
+seznam_na_ceste_s = []
+seznam_vojaku_j = []
+seznam_na_ceste_j = []
     
 def zobraz_mapu(mapa):
     for cesta in mapa["cesty"]:
@@ -94,6 +107,12 @@ def zobraz_mapu(mapa):
     pygame.draw.polygon(okno, pozadi, body_j)
     pygame.draw.polygon(okno, (255,0,0), body_j, 5)
     
+    for vojak in seznam_vojaku_s:
+        pygame.draw.circle(okno, (0,0,185), (vojak[0], vojak[1]), 5)
+        
+    for vojak in seznam_vojaku_j:
+        pygame.draw.circle(okno, (185,0,0), (vojak[0], vojak[1]), 5)
+    
     for i, cislo in enumerate(mapa["cisla_s"]):
         if mapa["brany_s"][i]["stav"]:
             pygame.draw.circle(okno, BARVA_OZNACENI_SEVER, (mapa["brany_s"][i]["pozice"][0] * 150,mapa["brany_s"][i]["pozice"][1] * 150), 15)
@@ -111,6 +130,12 @@ def zobraz_mapu(mapa):
         napis = text.get_rect()
         napis.center = (cislo["pozice"][0] * 150, cislo["pozice"][1] * 150)
         okno.blit(text, napis)
+        
+    for vojak in seznam_na_ceste_s:
+        pygame.draw.circle(okno, (0,0,185), (vojak[0]*150, vojak[1]*150), 5)
+        
+    for vojak in seznam_na_ceste_j:
+        pygame.draw.circle(okno, (185,0,0), (vojak[0]*150, vojak[1]*150), 5)
 
 while True:
     udalosti = pygame.event.get()
@@ -118,6 +143,17 @@ while True:
         if udalost.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if udalost.type == spawn:
+            spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
+            spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
+        if udalost.type == pustit:
+            pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
+            pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
+        if udalost.type == pohyb:
+            kontrola(mapa, seznam_na_ceste_s, "s")
+            pohni(mapa, seznam_na_ceste_s, "s")
+            kontrola(mapa, seznam_na_ceste_j, "j")
+            pohni(mapa, seznam_na_ceste_j, "j")
     
     stisk = pygame.key.get_pressed()
     
