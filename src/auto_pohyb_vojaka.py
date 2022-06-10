@@ -57,11 +57,8 @@ uhel_micku_modreho = math.atan2(x1_cary_sikmo - x2_cary_sikmo, y1_cary_sikmo - y
 dy1 = v * math.sin(uhel_micku_modreho)
 dx1 = v * math.cos(uhel_micku_modreho)
 
-vojaci = [modry, cerveny]
-
-for vojak in vojaci:
-    vojak.x += dx * v
-    vojak.y += dy * v
+vojaci_modry = [modry]
+vojaci_cerveny = [cerveny]
 
 dostrel = 12
 
@@ -82,6 +79,13 @@ while True:
         if u.type == pygame.MOUSEWHEEL:
             if u.y < 0:
                 pygame.display.iconify()
+                
+    for vojak in vojaci_modry:
+        vojak.x -= dx * v
+        vojak.y -= dy * v
+    for vojak in vojaci_cerveny:
+        vojak.x += dx * v
+        vojak.y += dy * v
              
     #pohyb cerveny
     if zije:
@@ -109,8 +113,9 @@ while True:
     pygame.draw.circle(okno,cervena,(vojak_cerveny_x, vojak_cerveny_y), r)
     pygame.draw.circle(okno,modra,(vojak_modry_x, vojak_modry_y), r)
     
-    for vojak in vojaci:
-        pygame.draw.circle(okno, (100,200,100),(vojak.x,vojak.y),r)
-    
+    for vojak in vojaci_cerveny:
+        pygame.draw.circle(okno, cervena,(vojak.x,vojak.y),r)
+    for vojak in vojaci_modry:
+         pygame.draw.circle(okno, modra,(vojak.x,vojak.y),r)
     
     pygame.display.update()
