@@ -49,26 +49,54 @@ def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste, brany):
 
 def rozhodni_cestu(mapa, vojak, strana):
     if strana == "s":
-         for vyhybka in mapa["vyhybky_s"]:
-             if round(vojak[0]) == vyhybka["pozice"][0] and round(vojak[1]) == vyhybka["pozice"][1]:
-                 if vyhybka["stav"] == True:
-                     smer = vyhybka["rozcesti"][1]
-                 else:
-                     smer = vyhybka["rozcesti"][0]
+        trasa = None
+        for vyhybka in mapa["vyhybky_s"]:
+            if round(vojak[0]) == vyhybka["pozice"][0] and round(vojak[1]) == vyhybka["pozice"][1]:
+                if vyhybka["stav"] == True:
+                    smer = vyhybka["rozcesti"][1]
+                else:
+                    smer = vyhybka["rozcesti"][0]
                  
-                 for i, bod in enumerate(mapa["body"]):
+                for i, bod in enumerate(mapa["body"]):
                     if bod == vojak[2]:
-                        momentalni_bod = i
-                        break
+                       momentalni_bod = i
+                       break
                 
-                 if smer == "Z":
-                    vojak[2] = mapa["body"][momentalni_bod-1]
-                 elif smer == "JZ":
-                    vojak[2] = mapa["body"][momentalni_bod+6]
-                 elif smer == "J":
-                    vojak[2] = mapa["body"][momentalni_bod+7]
-                    
-                 return vojak
+                if smer == "Z":
+                   vojak[2] = mapa["body"][momentalni_bod-1]
+                elif smer == "JZ":
+                   vojak[2] = mapa["body"][momentalni_bod+6]
+                elif smer == "J":
+                   vojak[2] = mapa["body"][momentalni_bod+7]
+                
+                trasa = "mám"
+                return vojak
+        
+        if trasa == None:
+            vojakova_cesta = "není"
+            for bod in mapa["body"]:
+                if round(vojak[0]) == bod[0] and round(vojak[1]) == bod[1]:
+                    for cesta in mapa["cesty"]:
+                        if bod in cesta:
+                            vojakova_cesta = cesta
+                            break
+                    for i, kus in enumerate(vojakova_cesta):
+                        if kus == bod:
+                            break
+                    if i == 0 or i == len(vojakova_cesta):
+                        pocitani = 0
+                        for i, cesta in enumerate(mapa["cesty"]):
+                            if pozice_vojaka in cesta:
+                                if pocitani < 1:
+                                    pocitani += 1
+                                else:
+                                    vojakova_cesta = cesta
+                                    bod_cesty = i
+                else:
+                    if vojakova_cesta == "není":
+                        pass
+                    else:
+                        vojak[2] = (vojakova_cesta[i-1][0], vojakova_cesta[i-1][1])
 
 def pohni(mapa, seznam_vojaku_na_ceste, strana):
     for v in seznam_vojaku_na_ceste:
