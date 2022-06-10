@@ -142,3 +142,11 @@ def pohni(mapa, seznam_vojaku_na_ceste, strana):
             v[0] += posun_x
             v[1] += posun_y
     return seznam_vojaku_na_ceste
+
+def kontrola(mapa, seznam_vojaku_na_ceste, strana):
+    if strana == "s":
+        for vojak in seznam_vojaku_na_ceste[:]:
+            for brana in mapa["brany_j"]:
+                if ((brana["pozice"][0] - vojak[0])**2+(brana["pozice"][1] - vojak[1])**2)**0.5 < 2/150:
+                    seznam_vojaku_na_ceste.remove(vojak)
+    return seznam_vojaku_na_ceste
