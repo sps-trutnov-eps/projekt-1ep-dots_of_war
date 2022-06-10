@@ -101,6 +101,7 @@ def rozhodni_cestu(mapa, vojak, strana):
                         if bod == mapa["body"][cislo_vyhybky-1] or bod == mapa["body"][cislo_vyhybky+6] or bod == mapa["body"][cislo_vyhybky+7]:
                             vojak[2] = bod
                             break
+                print(cislovane_cesty)
                         
                 trasa = "mám"
                 return vojak
@@ -149,4 +150,3 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana):
             for brana in mapa["brany_j"]:
                 if ((brana["pozice"][0] - vojak[0])**2+(brana["pozice"][1] - vojak[1])**2)**0.5 < 2/150:
                     seznam_vojaku_na_ceste.remove(vojak)
-    return seznam_vojaku_na_ceste
