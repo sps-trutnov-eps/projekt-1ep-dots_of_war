@@ -156,6 +156,65 @@ def rozhodni_cestu(mapa, vojak, strana):
                 
                 trasa = "mám"
                 return vojak
+        
+        for vyhybka in mapa["vyhybky_s"]:
+            if round(vojak[0]) == vyhybka["pozice"][0] and round(vojak[1]) == vyhybka["pozice"][1]:
+                cesta1 = None
+                cesta2 = None
+                cesta3 = None
+                for cesta in mapa["cesty"]:
+                    if vyhybka["pozice"] in cesta:
+                        if cesta1 == None:
+                            cesta1 = cesta
+                        elif cesta1 != None and cesta2 == None:
+                            cesta2 = cesta
+                        elif cesta1 != None and cesta2 != None and cesta3 == None:
+                            cesta3 = cesta
+                            break
+                
+                cislovane_cesty = [cesta1, cesta2, cesta3]
+                
+                cislo_vyhybky = None
+                
+                for i, x in enumerate(mapa["body"]):
+                    if x == vyhybka["pozice"]:
+                        cislo_vyhybky = i
+                        break
+                
+                for cesta in cislovane_cesty:
+                    for bod in cesta:
+                        if bod == mapa["body"][cislo_vyhybky+1] or bod == mapa["body"][cislo_vyhybky-6] or bod == mapa["body"][cislo_vyhybky-7]:
+                            vojak[2] = bod
+                            break
+                
+                trasa = "mám"
+                return vojak
+            
+        if trasa == None:
+            vojakova_cesta = "není"
+            for bod in mapa["body"]:
+                if round(vojak[0]) == bod[0] and round(vojak[1]) == bod[1]:
+                    for cesta in mapa["cesty"]:
+                        if bod in cesta:
+                            vojakova_cesta = cesta
+                            break
+                    for i, kus in enumerate(vojakova_cesta):
+                        if kus == bod:
+                            break
+                    if i == 0 or i == len(vojakova_cesta):
+                        pocitani = 0
+                        for i, cesta in enumerate(mapa["cesty"]):
+                            if pozice_vojaka in cesta:
+                                if pocitani < 1:
+                                    pocitani += 1
+                                else:
+                                    vojakova_cesta = cesta
+                                    bod_cesty = i
+                else:
+                    if vojakova_cesta == "není":
+                        pass
+                    else:
+                        vojak[2] = (vojakova_cesta[i+1][0], vojakova_cesta[i+1][1])
 
 def pohni(mapa, seznam_vojaku_na_ceste, strana):
     for v in seznam_vojaku_na_ceste:
@@ -173,5 +232,10 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana):
     if strana == "s":
         for vojak in seznam_vojaku_na_ceste[:]:
             for brana in mapa["brany_j"]:
+                if ((brana["pozice"][0] - vojak[0])**2+(brana["pozice"][1] - vojak[1])**2)**0.5 < 2/150:
+                    seznam_vojaku_na_ceste.remove(vojak)
+    elif strana == "j":
+        for vojak in seznam_vojaku_na_ceste[:]:
+            for brana in mapa["brany_s"]:
                 if ((brana["pozice"][0] - vojak[0])**2+(brana["pozice"][1] - vojak[1])**2)**0.5 < 2/150:
                     seznam_vojaku_na_ceste.remove(vojak)
