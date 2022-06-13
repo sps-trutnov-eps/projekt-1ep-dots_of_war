@@ -26,7 +26,8 @@ seznam_vojaku_s = []
 seznam_na_ceste_s = []
 seznam_vojaku_j = []
 seznam_na_ceste_j = []
-    
+spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
+spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
 def zobraz_mapu(mapa):
     for cesta in mapa["cesty"]:
         hotove_body = []
@@ -150,9 +151,9 @@ while True:
             pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
             pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
         if udalost.type == pohyb:
-            kontrola(mapa, seznam_na_ceste_s, "s")
+            kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j)
             pohni(mapa, seznam_na_ceste_s, "s")
-            kontrola(mapa, seznam_na_ceste_j, "j")
+            kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s)
             pohni(mapa, seznam_na_ceste_j, "j")
     
     stisk = pygame.key.get_pressed()
