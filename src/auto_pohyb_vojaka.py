@@ -48,6 +48,7 @@ def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste, brany):
             pass
 
 def rozhodni_cestu(mapa, vojak, strana):
+    #SEVER
     if strana == "s":
         trasa = None
         for vyhybka in mapa["vyhybky_s"]:
@@ -91,8 +92,8 @@ def rozhodni_cestu(mapa, vojak, strana):
                 
                 cislo_vyhybky = None
                 
-                for i, bod in enumerate(mapa["body"]):
-                    if bod == vyhybka["pozice"]:
+                for i, x in enumerate(mapa["body"]):
+                    if x == vyhybka["pozice"]:
                         cislo_vyhybky = i
                         break
                 
@@ -101,8 +102,7 @@ def rozhodni_cestu(mapa, vojak, strana):
                         if bod == mapa["body"][cislo_vyhybky-1] or bod == mapa["body"][cislo_vyhybky+6] or bod == mapa["body"][cislo_vyhybky+7]:
                             vojak[2] = bod
                             break
-                print(cislovane_cesty)
-                        
+                
                 trasa = "mám"
                 return vojak
         
@@ -131,6 +131,31 @@ def rozhodni_cestu(mapa, vojak, strana):
                         pass
                     else:
                         vojak[2] = (vojakova_cesta[i-1][0], vojakova_cesta[i-1][1])
+    
+    #JIH                    
+    elif strana == "j":
+        trasa = None
+        for vyhybka in mapa["vyhybky_j"]:
+            if round(vojak[0]) == vyhybka["pozice"][0] and round(vojak[1]) == vyhybka["pozice"][1]:
+                if vyhybka["stav"] == True:
+                    smer = vyhybka["rozcesti"][1]
+                else:
+                    smer = vyhybka["rozcesti"][0]
+                 
+                for i, bod in enumerate(mapa["body"]):
+                    if bod == vojak[2]:
+                       momentalni_bod = i
+                       break
+                
+                if smer == "S":
+                   vojak[2] = mapa["body"][momentalni_bod-7]
+                elif smer == "SV":
+                   vojak[2] = mapa["body"][momentalni_bod-6]
+                elif smer == "V":
+                   vojak[2] = mapa["body"][momentalni_bod+1]
+                
+                trasa = "mám"
+                return vojak
 
 def pohni(mapa, seznam_vojaku_na_ceste, strana):
     for v in seznam_vojaku_na_ceste:
