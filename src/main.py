@@ -15,7 +15,9 @@ okno = pygame.display.set_mode(rozliseni)
 hodinky = pygame.time.Clock()
 font = pygame.font.SysFont("oldenglishtext.ttf", 24)
 font_vyhry = pygame.font.SysFont("oldenglishtext.ttf", 50)
-hrajem = True
+konec = False
+bila = (255,255,255)
+cerna = (0,0,0)
 
 spawn = pygame.USEREVENT+0
 pustit = pygame.USEREVENT+1
@@ -146,16 +148,14 @@ while True:
         if udalost.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if udalost.type == spawn and hrajem == True:
+        if udalost.type == spawn and not konec:
             spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
             spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
-        if udalost.type == pustit and hrajem == True:
+        if udalost.type == pustit and not konec:
             pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
             pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
-        if udalost.type == pohyb and hrajem == True:
-            
+        if udalost.type == pohyb and not konec:
             pohni(mapa, seznam_na_ceste_s, "s")
-            
             pohni(mapa, seznam_na_ceste_j, "j")
     
     stisk = pygame.key.get_pressed()
@@ -165,13 +165,26 @@ while True:
         sys.exit()
     
     okno.fill(pozadi)
-    if hrajem == True:
-        oznac(mapa)
-        prehod(mapa, seznam_vojaku_s, seznam_vojaku_j)
-        brany(mapa)
+    oznac(mapa)
+    prehod(mapa, seznam_vojaku_s, seznam_vojaku_j)
+    brany(mapa)
     zobraz_mapu(mapa)
-    kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j, hrajem)
-    kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s, hrajem)
+    kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j, konec)
+    kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s, konec)
+    if seznam_vojaku_s == [] or seznam_vojaku_j == []:
+        konec = True
     
+    zobraz_mapu(mapa)
     pygame.display.update()
     hodinky.tick(60)
+    
+    while konec:
+        zobraz_mapu(mapa)
+        if seznam_vojaku_s == []:
+            text = font_vyhry.render("Jižní království vítězí", True, bila)
+        elif seznam_vojaku_j == []:
+            text = font_vyhry.render("Severní království vítězí", True, bila)
+        misto_pro_text = text.get_rect(center=(rozliseni_x/2,rozliseni_y/2 - 50))
+        okno.blit(text, misto_pro_text)
+        pygame.display.update()
+        hodinky.tick(60)

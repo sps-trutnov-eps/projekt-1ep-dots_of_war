@@ -24,7 +24,7 @@ def spawni(seznam_vojaku, mapa, zakladna):
 def pust(mapa, seznam_vojaku, seznam_vojaku_na_ceste, brany):
     for brana in brany:
         if brana["stav"] == True:
-            if seznam_vojaku != []:
+            if len(seznam_vojaku) != 1:
                 vojak_nove_na_ceste = seznam_vojaku[0]
                 seznam_vojaku.remove(seznam_vojaku[0])
                 seznam_vojaku_na_ceste.append(vojak_nove_na_ceste)
@@ -238,10 +238,6 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, hrajem):
                         seznam_nepratel.pop()
                         if seznam_nepratel != []:
                             seznam_nepratel.pop()
-                        else:
-                            hrajem = False
-                    else:
-                        hrajem = False
         
     elif strana == "j":
         for vojak in seznam_vojaku_na_ceste[:]:
@@ -252,7 +248,3 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, hrajem):
                         seznam_nepratel.pop()
                         if seznam_nepratel != []:
                             seznam_nepratel.pop()
-                        else:
-                            hrajem = False
-                    else:
-                        hrajem = False

@@ -203,7 +203,7 @@ def prehod(mapa, seznam_vojaku_s, seznam_vojaku_j):
                             vec["stav"] = True
                 else:
                     if vec["vybrano"]:
-                        if len(seznam_vojaku_s) > 10:
+                        if len(seznam_vojaku_s) > 10 and vec["hp"] != 25:
                             for i in range(10):
                                 seznam_vojaku_s.pop()
                             vec["hp"] = 25
