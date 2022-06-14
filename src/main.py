@@ -14,13 +14,15 @@ pygame.display.set_caption("Dots of War")
 okno = pygame.display.set_mode(rozliseni)
 hodinky = pygame.time.Clock()
 font = pygame.font.SysFont("oldenglishtext.ttf", 24)
+font_vyhry = pygame.font.SysFont("oldenglishtext.ttf", 50)
+hrajem = True
 
 spawn = pygame.USEREVENT+0
 pustit = pygame.USEREVENT+1
 pohyb = pygame.USEREVENT+2
-casovac_spawn = pygame.time.set_timer(spawn,200)
-casovac_pustit = pygame.time.set_timer(pustit,100)
-casovac_pohyb = pygame.time.set_timer(pohyb,10)
+casovac_spawn = pygame.time.set_timer(spawn,500)
+casovac_pustit = pygame.time.set_timer(pustit,200)
+casovac_pohyb = pygame.time.set_timer(pohyb,20)
 
 seznam_vojaku_s = []
 seznam_na_ceste_s = []
@@ -144,16 +146,16 @@ while True:
         if udalost.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if udalost.type == spawn:
+        if udalost.type == spawn and hrajem:
             spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
             spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
-        if udalost.type == pustit:
+        if udalost.type == pustit and hrajem:
             pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
             pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
-        if udalost.type == pohyb:
-            kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j)
+        if udalost.type == pohyb and hrajem:
+            kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j, hrajem)
             pohni(mapa, seznam_na_ceste_s, "s")
-            kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s)
+            kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s, hrajem)
             pohni(mapa, seznam_na_ceste_j, "j")
     
     stisk = pygame.key.get_pressed()
@@ -163,11 +165,14 @@ while True:
         sys.exit()
     
     okno.fill(pozadi)
-    
-    oznac(mapa)
-    prehod(mapa)
-    brany(mapa)
+    if hrajem == True:
+        oznac(mapa)
+        prehod(mapa, seznam_vojaku_s, seznam_vojaku_j)
+        brany(mapa)
     zobraz_mapu(mapa)
+    kontrola_smrti(seznam_vojaku_s, "s", hrajem)
+    kontrola_smrti(seznam_vojaku_j, "j", hrajem)
+    print(hrajem)
     
     pygame.display.update()
     hodinky.tick(60)

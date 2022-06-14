@@ -228,7 +228,7 @@ def pohni(mapa, seznam_vojaku_na_ceste, strana):
             v[1] += posun_y
     return seznam_vojaku_na_ceste
 
-def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel):
+def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, hrajem):
     if strana == "s":
         for vojak in seznam_vojaku_na_ceste[:]:
             for brana in mapa["brany_j"]:
@@ -236,6 +236,14 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel):
                     seznam_vojaku_na_ceste.remove(vojak)
                     if seznam_nepratel != []:
                         seznam_nepratel.pop()
+                        if seznam_nepratel != []:
+                            seznam_nepratel.pop()
+                        else:
+                            kontrola_smrti(seznam_nepratel, "s", hrajem)
+                    else:
+                        kontrola_smrti(seznam_nepratel, "s", hrajem)
+        return hrajem
+        
     elif strana == "j":
         for vojak in seznam_vojaku_na_ceste[:]:
             for brana in mapa["brany_s"]:
@@ -243,3 +251,15 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel):
                     seznam_vojaku_na_ceste.remove(vojak)
                     if seznam_nepratel != []:
                         seznam_nepratel.pop()
+                        if seznam_nepratel != []:
+                            seznam_nepratel.pop()
+                        else:
+                            kontrola_smrti(seznam_nepratel, "j", hrajem)
+                    else:
+                        kontrola_smrti(seznam_nepratel, "j", hrajem)
+        return hrajem
+                            
+def kontrola_smrti(seznam_vojaku, strana, hrajem):
+    if seznam_vojaku == []:
+        hrajem = False
+    return hrajem

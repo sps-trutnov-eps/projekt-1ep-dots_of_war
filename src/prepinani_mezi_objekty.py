@@ -185,7 +185,7 @@ def oznac(mapa):
                 
     return mapa
 
-def prehod(mapa):
+def prehod(mapa, seznam_vojaku_s, seznam_vojaku_j):
     global povoleni_prehozeni_s
     global povoleni_prehozeni_j
     
@@ -203,8 +203,12 @@ def prehod(mapa):
                             vec["stav"] = True
                 else:
                     if vec["vybrano"]:
-                        vec["hp"] = 1
-                    
+                        if len(seznam_vojaku_s) > 10:
+                            for i in range(10):
+                                seznam_vojaku_s.pop()
+                            vec["hp"] = 25
+                        else:
+                            pass          
     else:
         povoleni_prehozeni_s = True
         
@@ -220,8 +224,12 @@ def prehod(mapa):
                             vec["stav"] = True
                 else:
                     if vec["vybrano"]:
-                        vec["hp"] = 1
-                    
+                        if len(seznam_vojaku_j) > 10:
+                            for i in range(10):
+                                seznam_vojaku_j.pop()
+                            vec["hp"] = 25
+                        else:
+                            pass
     else:
         povoleni_prehozeni_j = True
         
