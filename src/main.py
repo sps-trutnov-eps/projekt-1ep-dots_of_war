@@ -146,16 +146,16 @@ while True:
         if udalost.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if udalost.type == spawn and hrajem:
+        if udalost.type == spawn and hrajem == True:
             spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
             spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
-        if udalost.type == pustit and hrajem:
+        if udalost.type == pustit and hrajem == True:
             pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
             pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
-        if udalost.type == pohyb and hrajem:
-            kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j, hrajem)
+        if udalost.type == pohyb and hrajem == True:
+            
             pohni(mapa, seznam_na_ceste_s, "s")
-            kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s, hrajem)
+            
             pohni(mapa, seznam_na_ceste_j, "j")
     
     stisk = pygame.key.get_pressed()
@@ -170,9 +170,8 @@ while True:
         prehod(mapa, seznam_vojaku_s, seznam_vojaku_j)
         brany(mapa)
     zobraz_mapu(mapa)
-    kontrola_smrti(seznam_vojaku_s, "s", hrajem)
-    kontrola_smrti(seznam_vojaku_j, "j", hrajem)
-    print(hrajem)
+    kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j, hrajem)
+    kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s, hrajem)
     
     pygame.display.update()
     hodinky.tick(60)

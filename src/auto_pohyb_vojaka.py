@@ -239,10 +239,9 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, hrajem):
                         if seznam_nepratel != []:
                             seznam_nepratel.pop()
                         else:
-                            kontrola_smrti(seznam_nepratel, "s", hrajem)
+                            hrajem = False
                     else:
-                        kontrola_smrti(seznam_nepratel, "s", hrajem)
-        return hrajem
+                        hrajem = False
         
     elif strana == "j":
         for vojak in seznam_vojaku_na_ceste[:]:
@@ -254,12 +253,6 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, hrajem):
                         if seznam_nepratel != []:
                             seznam_nepratel.pop()
                         else:
-                            kontrola_smrti(seznam_nepratel, "j", hrajem)
+                            hrajem = False
                     else:
-                        kontrola_smrti(seznam_nepratel, "j", hrajem)
-        return hrajem
-                            
-def kontrola_smrti(seznam_vojaku, strana, hrajem):
-    if seznam_vojaku == []:
-        hrajem = False
-    return hrajem
+                        hrajem = False
