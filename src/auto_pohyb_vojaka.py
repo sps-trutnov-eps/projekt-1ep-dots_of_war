@@ -40,12 +40,6 @@ y1_cary_sikmo = ROZLISENI_Y - 100
 x2_cary_sikmo = 1600
 y2_cary_sikmo = 100
 
-cerveny = Vojak(100, ROZLISENI_Y - 100)
-modry = Vojak(1600, 100)
-
-vojaci_modry = [modry]
-vojaci_cerveny = [cerveny]
-
 #pohyb červeného míčku
 uhel_micku_cerveneho = math.atan2(y2_cary_sikmo - y1_cary_sikmo, x2_cary_sikmo - x1_cary_sikmo)
 dy = v * math.sin(uhel_micku_cerveneho)
@@ -55,6 +49,24 @@ pygame.init()
 uhel_micku_modreho = math.atan2(y2_cary_sikmo - y1_cary_sikmo, x2_cary_sikmo - x1_cary_sikmo)
 dy1 = v * math.sin(uhel_micku_modreho)
 dx1 = v * math.cos(uhel_micku_modreho)
+
+vojaci_cerveny = []
+vojaci_modry = []
+
+rozestup = 50
+
+
+for poradi in range(1000):
+    cerveny = Vojak(100 - poradi * dx * rozestup, ROZLISENI_Y - 100 - poradi * dy * rozestup)
+    vojaci_cerveny.append(cerveny)
+    
+for poradi in range(1000):
+    modry = Vojak(100 + poradi * dx1 * rozestup, ROZLISENI_Y - 100 + poradi * dy1 * rozestup)
+    vojaci_modry.append(modry)
+
+
+modry = Vojak(1600, 100)
+vojaci_modry.append(modry)
 
 dostrel = 12
 
