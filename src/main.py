@@ -1,14 +1,16 @@
 import pygame
 import sys
+import os
+
+os.environ['SDL_VIDEO_CENTERED'] = '1'
+pygame.init()
+
 from map import mapa
 from prepinani_mezi_objekty import *
 from auto_pohyb_vojaka import *
 
 pozadi = 20,150,20
 rozliseni = rozliseni_x, rozliseni_y = 900, 900
-
-import pygame
-pygame.init()
 
 pygame.display.set_caption("Dots of War")
 okno = pygame.display.set_mode(rozliseni)
