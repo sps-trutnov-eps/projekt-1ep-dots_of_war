@@ -1,8 +1,8 @@
 import pygame
 import sys
 from map import mapa
-from prepinani_mezi_objekty import *
-from auto_pohyb_vojaka import *
+from ovladani import *
+from automatizace import *
 
 pozadi = 20,150,20
 rozliseni = rozliseni_x, rozliseni_y = 900, 900
@@ -169,6 +169,9 @@ while True:
         oznac(mapa)
         prehod(mapa, seznam_vojaku_s, seznam_vojaku_j)
         brany(mapa)
+    utok_na_vez(mapa, seznam_na_ceste_s, "s")
+    utok_na_vez(mapa, seznam_na_ceste_j, "j")
+    utok(seznam_na_ceste_s, seznam_na_ceste_j)
     zobraz_mapu(mapa)
     kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j, konec)
     kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s, konec)
@@ -213,4 +216,4 @@ while True:
                 vyhybka["stav"] = True
         
     pygame.display.update()
-    hodinky.tick(60)
+    hodinky.tick(144)

@@ -230,7 +230,7 @@ def pohni(mapa, seznam_vojaku_na_ceste, strana):
             v[1] += posun_y
     return seznam_vojaku_na_ceste
 
-def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, hrajem):
+def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, konec):
     if strana == "s":
         for vojak in seznam_vojaku_na_ceste[:]:
             for brana in mapa["brany_j"]:
@@ -248,3 +248,31 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, hrajem):
                     for i in range(PREVAHA_NA_ZAKLADNE):
                         if seznam_nepratel != []:
                             seznam_nepratel.pop()
+                            
+def utok_na_vez(mapa, seznam_vojaku, strana):
+    if strana == "s":
+        for vojak in seznam_vojaku:
+            for vez in mapa["veze_j"]:
+                if (abs(vez["pozice"][0] - vojak[0])**2 + abs(vez["pozice"][1] - vojak[1])**2) < 1/150:
+                    if vez["hp"] == 0:
+                        pass
+                    else:
+                        seznam_vojaku.remove(vojak)
+                        vez["hp"] -= 1
+                    
+    if strana == "j":
+        for vojak in seznam_vojaku:
+            for vez in mapa["veze_s"]:
+                if (abs(vez["pozice"][0] - vojak[0])**2 + abs(vez["pozice"][1] - vojak[1])**2) < 1/150:
+                    if vez["hp"] == 0:
+                        pass
+                    else:
+                        seznam_vojaku.remove(vojak)
+                        vez["hp"] -= 1
+                        
+def utok(seznam_vojaku, seznam_nepratel):
+    for vojak in seznam_vojaku:
+        for nepritel in seznam_nepratel:
+            if ((nepritel[0] - vojak[0])**2 + (nepritel[1] - vojak[1])**2) < 0.5/150:
+                seznam_vojaku.remove(vojak)
+                seznam_nepratel.remove(nepritel)
