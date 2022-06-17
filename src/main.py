@@ -5,7 +5,7 @@ import os
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
 
-from map import mapa
+from mapa import mapa
 from ovladani import *
 from automatizace import *
 

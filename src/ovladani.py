@@ -1,7 +1,7 @@
 # zkouska na vybirani objektu a presckavani mezi nimi
 import pygame
 import sys
-from map import mapa
+from mapa import mapa
 
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 900, 900
 
