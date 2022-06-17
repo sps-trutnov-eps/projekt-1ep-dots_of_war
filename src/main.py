@@ -165,9 +165,10 @@ while True:
         sys.exit()
     
     okno.fill(pozadi)
-    oznac(mapa)
-    prehod(mapa, seznam_vojaku_s, seznam_vojaku_j)
-    brany(mapa)
+    if not konec:
+        oznac(mapa)
+        prehod(mapa, seznam_vojaku_s, seznam_vojaku_j)
+        brany(mapa)
     zobraz_mapu(mapa)
     kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j, konec)
     kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s, konec)
@@ -175,16 +176,41 @@ while True:
         konec = True
     
     zobraz_mapu(mapa)
-    pygame.display.update()
-    hodinky.tick(60)
     
-    while konec:
+    if konec:
         zobraz_mapu(mapa)
         if seznam_vojaku_s == []:
-            text = font_vyhry.render("Jižní království vítězí", True, bila)
+            barva = (230,100,100)
+            text = font_vyhry.render("Jižní království vítězí", True, barva)
         elif seznam_vojaku_j == []:
-            text = font_vyhry.render("Severní království vítězí", True, bila)
+            barva = (100,100,230)
+            text = font_vyhry.render("Severní království vítězí", True, barva)
+        text2 = font.render("Stiskni R pro restart", True, bila)
         misto_pro_text = text.get_rect(center=(rozliseni_x/2,rozliseni_y/2 - 50))
+        misto_pro_text2 = text.get_rect(center=(rozliseni_x/2,rozliseni_y/2 + 50))
+        pygame.draw.rect(okno, cerna, (100,100,700,700))
         okno.blit(text, misto_pro_text)
-        pygame.display.update()
-        hodinky.tick(60)
+        okno.blit(text2, misto_pro_text2)
+        if stisk[pygame.K_r]:
+            konec = False
+            seznam_na_ceste_s = []
+            seznam_na_ceste_j = []
+            seznam_vojaku_s = []
+            seznam_vojaku_j = []
+            spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
+            spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
+            for brana in mapa["brany_s"]:
+                brana["stav"] = False
+            for brana in mapa["brany_j"]:
+                brana["stav"] = False
+            for vez in mapa["veze_s"]:
+                vez["hp"] = 0
+            for vez in mapa["veze_j"]:
+                vez["hp"] = 0
+            for vyhybka in mapa["vyhybky_s"]:
+                vyhybka["stav"] = False
+            for vyhybka in mapa["vyhybky_j"]:
+                vyhybka["stav"] = True
+        
+    pygame.display.update()
+    hodinky.tick(60)

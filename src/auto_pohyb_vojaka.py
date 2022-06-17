@@ -3,6 +3,8 @@ import sys
 import random
 import math
 
+PREVAHA_NA_ZAKLADNE = 2
+
 def spawni(seznam_vojaku, mapa, zakladna):
     rameno = 75 + 7.07
     x = y = 0
@@ -234,8 +236,7 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, hrajem):
             for brana in mapa["brany_j"]:
                 if ((brana["pozice"][0] - vojak[0])**2+(brana["pozice"][1] - vojak[1])**2)**0.5 < 2/150:
                     seznam_vojaku_na_ceste.remove(vojak)
-                    if seznam_nepratel != []:
-                        seznam_nepratel.pop()
+                    for i in range(PREVAHA_NA_ZAKLADNE):
                         if seznam_nepratel != []:
                             seznam_nepratel.pop()
         
@@ -244,7 +245,6 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, hrajem):
             for brana in mapa["brany_s"]:
                 if ((brana["pozice"][0] - vojak[0])**2+(brana["pozice"][1] - vojak[1])**2)**0.5 < 2/150:
                     seznam_vojaku_na_ceste.remove(vojak)
-                    if seznam_nepratel != []:
-                        seznam_nepratel.pop()
+                    for i in range(PREVAHA_NA_ZAKLADNE):
                         if seznam_nepratel != []:
                             seznam_nepratel.pop()

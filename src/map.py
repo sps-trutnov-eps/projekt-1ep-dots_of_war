@@ -17,11 +17,11 @@ vyhybky_s = [
             ]
     
 vyhybky_j = [
-    {"pozice":body[22],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":True},
-    {"pozice":body[23],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":False}, 
-    {"pozice":body[30],"stav":False,"hrac":"j","rozcesti":("S","V"),"vybrano":False},
-    {"pozice":body[32],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":False},
-    {"pozice":body[38],"stav":False,"hrac":"j","rozcesti":("SV","V"),"vybrano":False},
+    {"pozice":body[22],"stav":True,"hrac":"j","rozcesti":("S","SV"),"vybrano":True},
+    {"pozice":body[23],"stav":True,"hrac":"j","rozcesti":("S","SV"),"vybrano":False}, 
+    {"pozice":body[30],"stav":True,"hrac":"j","rozcesti":("S","V"),"vybrano":False},
+    {"pozice":body[32],"stav":True,"hrac":"j","rozcesti":("S","SV"),"vybrano":False},
+    {"pozice":body[38],"stav":True,"hrac":"j","rozcesti":("SV","V"),"vybrano":False},
             ]
 
 cesty = [
