@@ -14,19 +14,24 @@ pygame.display.set_caption("Dots of War")
 okno = pygame.display.set_mode(rozliseni)
 hodinky = pygame.time.Clock()
 font = pygame.font.SysFont("oldenglishtext.ttf", 24)
+font_vyhry = pygame.font.SysFont("oldenglishtext.ttf", 50)
+konec = False
+bila = (255,255,255)
+cerna = (0,0,0)
 
 spawn = pygame.USEREVENT+0
 pustit = pygame.USEREVENT+1
 pohyb = pygame.USEREVENT+2
-casovac_spawn = pygame.time.set_timer(spawn,200)
-casovac_pustit = pygame.time.set_timer(pustit,100)
-casovac_pohyb = pygame.time.set_timer(pohyb,10)
+casovac_spawn = pygame.time.set_timer(spawn,500)
+casovac_pustit = pygame.time.set_timer(pustit,200)
+casovac_pohyb = pygame.time.set_timer(pohyb,20)
 
 seznam_vojaku_s = []
 seznam_na_ceste_s = []
 seznam_vojaku_j = []
 seznam_na_ceste_j = []
-    
+spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
+spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
 def zobraz_mapu(mapa):
     for cesta in mapa["cesty"]:
         hotove_body = []
@@ -143,16 +148,14 @@ while True:
         if udalost.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if udalost.type == spawn:
+        if udalost.type == spawn and not konec:
             spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
             spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
-        if udalost.type == pustit:
+        if udalost.type == pustit and not konec:
             pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
             pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
-        if udalost.type == pohyb:
-            kontrola(mapa, seznam_na_ceste_s, "s")
+        if udalost.type == pohyb and not konec:
             pohni(mapa, seznam_na_ceste_s, "s")
-            kontrola(mapa, seznam_na_ceste_j, "j")
             pohni(mapa, seznam_na_ceste_j, "j")
     
     stisk = pygame.key.get_pressed()
@@ -162,11 +165,52 @@ while True:
         sys.exit()
     
     okno.fill(pozadi)
+    if not konec:
+        oznac(mapa)
+        prehod(mapa, seznam_vojaku_s, seznam_vojaku_j)
+        brany(mapa)
+    zobraz_mapu(mapa)
+    kontrola(mapa, seznam_na_ceste_s, "s", seznam_vojaku_j, konec)
+    kontrola(mapa, seznam_na_ceste_j, "j", seznam_vojaku_s, konec)
+    if seznam_vojaku_s == [] or seznam_vojaku_j == []:
+        konec = True
     
-    oznac(mapa)
-    prehod(mapa)
-    brany(mapa)
     zobraz_mapu(mapa)
     
+    if konec:
+        zobraz_mapu(mapa)
+        if seznam_vojaku_s == []:
+            barva = (230,100,100)
+            text = font_vyhry.render("Jižní království vítězí", True, barva)
+        elif seznam_vojaku_j == []:
+            barva = (100,100,230)
+            text = font_vyhry.render("Severní království vítězí", True, barva)
+        text2 = font.render("Stiskni R pro restart", True, bila)
+        misto_pro_text = text.get_rect(center=(rozliseni_x/2,rozliseni_y/2 - 50))
+        misto_pro_text2 = text.get_rect(center=(rozliseni_x/2,rozliseni_y/2 + 50))
+        pygame.draw.rect(okno, cerna, (100,100,700,700))
+        okno.blit(text, misto_pro_text)
+        okno.blit(text2, misto_pro_text2)
+        if stisk[pygame.K_r]:
+            konec = False
+            seznam_na_ceste_s = []
+            seznam_na_ceste_j = []
+            seznam_vojaku_s = []
+            seznam_vojaku_j = []
+            spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
+            spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
+            for brana in mapa["brany_s"]:
+                brana["stav"] = False
+            for brana in mapa["brany_j"]:
+                brana["stav"] = False
+            for vez in mapa["veze_s"]:
+                vez["hp"] = 0
+            for vez in mapa["veze_j"]:
+                vez["hp"] = 0
+            for vyhybka in mapa["vyhybky_s"]:
+                vyhybka["stav"] = False
+            for vyhybka in mapa["vyhybky_j"]:
+                vyhybka["stav"] = True
+        
     pygame.display.update()
     hodinky.tick(60)

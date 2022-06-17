@@ -17,32 +17,32 @@ vyhybky_s = [
             ]
     
 vyhybky_j = [
-    {"pozice":body[22],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":True},
-    {"pozice":body[23],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":False}, 
-    {"pozice":body[30],"stav":False,"hrac":"j","rozcesti":("S","V"),"vybrano":False},
-    {"pozice":body[32],"stav":False,"hrac":"j","rozcesti":("S","SV"),"vybrano":False},
-    {"pozice":body[38],"stav":False,"hrac":"j","rozcesti":("SV","V"),"vybrano":False},
+    {"pozice":body[22],"stav":True,"hrac":"j","rozcesti":("S","SV"),"vybrano":True},
+    {"pozice":body[23],"stav":True,"hrac":"j","rozcesti":("S","SV"),"vybrano":False}, 
+    {"pozice":body[30],"stav":True,"hrac":"j","rozcesti":("S","V"),"vybrano":False},
+    {"pozice":body[32],"stav":True,"hrac":"j","rozcesti":("S","SV"),"vybrano":False},
+    {"pozice":body[38],"stav":True,"hrac":"j","rozcesti":("SV","V"),"vybrano":False},
             ]
 
 cesty = [
-    (body[22], body[15], body[9], body[10]), (body[10], body[12]), #A, B
+    (body[22], body[15], body[9], body[10]), (body[10], body[11], body[12]), #A, B
     (body[16], body[10]), (body[18], body[12]), #C, D
-    (body[22], body[16]), (body[23], body[16]), (body[23], body[17], body[18]), (body[25], body[18]), (body[26], body[12]), #E, F, G, H, R
+    (body[22], body[16]), (body[23], body[16]), (body[23], body[17], body[18]), (body[25], body[18]), (body[26], body[19], body[12]), #E, F, G, H, R
     (body[30], body[23]), (body[30], body[31], body[25]), (body[32], body[25]), (body[32], body[26]), #I, J, K, L
-    (body[36], body[22]), (body[36], body[30]), (body[36], body[38]), (body[38], body[32]), (body[38], body[39], body[33], body[26]) #M, N, O, P, Q
+    (body[36], body[29], body[22]), (body[36], body[30]), (body[36], body[37], body[38]), (body[38], body[32]), (body[38], body[39], body[33], body[26]) #M, N, O, P, Q
         ]
 
 veze_s = [
     {"pozice":((abs(cesty[0][1][0] - cesty[0][2][0])/2) + cesty[0][1][0], (abs(cesty[0][1][1] - cesty[0][2][1])/2) + cesty[0][2][1]),"hrac":"s","hp":0,"vybrano":True}, #A
-    {"pozice":((abs(cesty[1][0][0] - cesty[1][1][0])/2) + cesty[1][0][0], (abs(cesty[1][0][1] - cesty[1][1][1])/2) + cesty[1][1][1]),"hrac":"s","hp":0,"vybrano":False}, #B
+    {"pozice":((abs(cesty[1][0][0] - cesty[1][2][0])/2) + cesty[1][0][0], (abs(cesty[1][0][1] - cesty[1][1][1])/2) + cesty[1][1][1]),"hrac":"s","hp":0,"vybrano":False}, #B
     {"pozice":((abs(cesty[6][1][0] - cesty[6][2][0])/2) + cesty[6][1][0], (abs(cesty[6][1][1] - cesty[6][2][1])/2) + cesty[6][2][1]),"hrac":"s","hp":0,"vybrano":False}, #G
-    {"pozice":((abs(cesty[8][0][0] - cesty[8][1][0])/2) + cesty[8][0][0], (abs(cesty[8][0][1] - cesty[8][1][1])/2) + cesty[8][1][1]),"hrac":"s","hp":0,"vybrano":False}, #R
+    {"pozice":((abs(cesty[8][0][0] - cesty[8][1][0])/2) + cesty[8][0][0], (abs(cesty[8][0][1] - cesty[8][2][1])/2) + cesty[8][2][1]),"hrac":"s","hp":0,"vybrano":False}, #R
          ]
     
 veze_j = [
-    {"pozice":((abs(cesty[13][0][0] - cesty[13][1][0])/2) + cesty[13][0][0], (abs(cesty[13][0][1] - cesty[13][1][1])/2) + cesty[13][1][1]),"hrac":"j","hp":0,"vybrano":True}, #M
+    {"pozice":((abs(cesty[13][0][0] - cesty[13][1][0])/2) + cesty[13][0][0], (abs(cesty[13][0][1] - cesty[13][2][1])/2) + cesty[13][2][1]),"hrac":"j","hp":0,"vybrano":True}, #M
     {"pozice":((abs(cesty[10][0][0] - cesty[10][1][0])/2) + cesty[10][0][0], (abs(cesty[10][0][1] - cesty[10][1][1])/2) + cesty[10][1][1]),"hrac":"j","hp":0,"vybrano":False}, #J
-    {"pozice":((abs(cesty[15][0][0] - cesty[15][1][0])/2) + cesty[15][0][0], (abs(cesty[15][0][1] - cesty[15][1][1])/2) + cesty[15][1][1]),"hrac":"j","hp":0,"vybrano":False}, #O
+    {"pozice":((abs(cesty[15][0][0] - cesty[15][2][0])/2) + cesty[15][0][0], (abs(cesty[15][0][1] - cesty[15][1][1])/2) + cesty[15][1][1]),"hrac":"j","hp":0,"vybrano":False}, #O
     {"pozice":((abs(cesty[17][1][0] - cesty[17][2][0])/2) + cesty[17][1][0], (abs(cesty[17][1][1] - cesty[17][2][1])/2) + cesty[17][2][1]),"hrac":"j","hp":0,"vybrano":False} #Q
          ]
 

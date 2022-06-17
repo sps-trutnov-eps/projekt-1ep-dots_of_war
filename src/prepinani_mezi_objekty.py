@@ -9,6 +9,8 @@ BARVA_POZADI = 0, 0, 0
 BARVA_OBJEKTU = 200, 30, 30
 BARVA_OZNACENI_SEVER = 200, 200, 255
 BARVA_OZNACENI_JIH = 255, 200, 200
+CENA_VEZE = 15
+HP_VEZE = 25
 w = 50
 h = 50
 w2 = 18
@@ -185,7 +187,7 @@ def oznac(mapa):
                 
     return mapa
 
-def prehod(mapa):
+def prehod(mapa, seznam_vojaku_s, seznam_vojaku_j):
     global povoleni_prehozeni_s
     global povoleni_prehozeni_j
     
@@ -203,8 +205,12 @@ def prehod(mapa):
                             vec["stav"] = True
                 else:
                     if vec["vybrano"]:
-                        vec["hp"] = 1
-                    
+                        if len(seznam_vojaku_s) > CENA_VEZE and not vec["hp"] == HP_VEZE:
+                            for i in range(CENA_VEZE):
+                                seznam_vojaku_s.pop()
+                            vec["hp"] = HP_VEZE
+                        else:
+                            pass          
     else:
         povoleni_prehozeni_s = True
         
@@ -220,8 +226,12 @@ def prehod(mapa):
                             vec["stav"] = True
                 else:
                     if vec["vybrano"]:
-                        vec["hp"] = 1
-                    
+                        if len(seznam_vojaku_j) > CENA_VEZE and not vec["hp"] == HP_VEZE:
+                            for i in range(CENA_VEZE):
+                                seznam_vojaku_j.pop()
+                            vec["hp"] = HP_VEZE
+                        else:
+                            pass
     else:
         povoleni_prehozeni_j = True
         
