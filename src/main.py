@@ -210,12 +210,18 @@ while True:
                 brana["stav"] = False
             for vez in mapa["veze_s"]:
                 vez["hp"] = 0
+                vez["vybrano"] = False
             for vez in mapa["veze_j"]:
                 vez["hp"] = 0
+                vez["vybrano"] = False
             for vyhybka in mapa["vyhybky_s"]:
                 vyhybka["stav"] = False
+                vyhybka["vybrano"] = False
+            mapa["vyhybky_s"][0]["vybrano"] = True
             for vyhybka in mapa["vyhybky_j"]:
                 vyhybka["stav"] = True
+                vyhybka["vybrano"] = False
+            mapa["vyhybky_j"][0]["vybrano"] = True
         
     pygame.display.update()
     hodinky.tick(144)
