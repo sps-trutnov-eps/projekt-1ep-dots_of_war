@@ -7,7 +7,6 @@ from automatizace import *
 pozadi = 20,150,20
 rozliseni = rozliseni_x, rozliseni_y = 900, 900
 
-import pygame
 pygame.init()
 
 ikona = pygame.image.load("../data/Ikona.png")
