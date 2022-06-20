@@ -1,5 +1,11 @@
-import pygame
 import sys
+
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    DATA_ROOT = '.'
+else:
+    DATA_ROOT = '..'
+
+import pygame
 import os
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -12,7 +18,7 @@ from automatizace import *
 pozadi = 20,150,20
 rozliseni = rozliseni_x, rozliseni_y = 900, 900
 
-ikona = pygame.image.load("../data/Ikona.png")
+ikona = pygame.image.load(DATA_ROOT + "/data/Ikona.png")
 pygame.display.set_caption("Dots of War")
 okno = pygame.display.set_mode(rozliseni)
 pygame.display.set_icon(ikona)
