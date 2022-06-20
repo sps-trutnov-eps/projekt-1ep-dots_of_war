@@ -6,6 +6,7 @@ Kombinace tower-defense a dota herních mechanismů. Vnikněte do základny prot
 
 ### Struktura repozitáře
 - `bin` binární verze hry
+- `data` assety hry
 - `doc` dokumentace, návody, pomůcky
 - `src` zdrojové soubory v Pythonu
 - `work` ukázky kódu, náčrtky atd.
