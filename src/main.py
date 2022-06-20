@@ -10,8 +10,10 @@ rozliseni = rozliseni_x, rozliseni_y = 900, 900
 import pygame
 pygame.init()
 
+ikona = pygame.image.load("../data/Ikona.png")
 pygame.display.set_caption("Dots of War")
 okno = pygame.display.set_mode(rozliseni)
+pygame.display.set_icon(ikona)
 hodinky = pygame.time.Clock()
 font = pygame.font.SysFont("oldenglishtext.ttf", 24)
 font_vyhry = pygame.font.SysFont("oldenglishtext.ttf", 50)
