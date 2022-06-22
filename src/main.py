@@ -142,6 +142,8 @@ def zobraz_mapu(mapa):
         
     for vojak in seznam_na_ceste_j:
         pygame.draw.circle(okno, (185,0,0), (vojak[0]*150, vojak[1]*150), 5)
+        
+zacatek = False
 
 while True:
     udalosti = pygame.event.get()
@@ -149,13 +151,13 @@ while True:
         if udalost.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if udalost.type == spawn and not konec:
+        if udalost.type == spawn and not konec and zacatek:
             spawni(seznam_vojaku_s, mapa, mapa["zakladna_s"])
             spawni(seznam_vojaku_j, mapa, mapa["zakladna_j"])
-        if udalost.type == pustit and not konec:
+        if udalost.type == pustit and not konec and zacatek:
             pust(mapa, seznam_vojaku_s, seznam_na_ceste_s, mapa["brany_s"])
             pust(mapa, seznam_vojaku_j, seznam_na_ceste_j, mapa["brany_j"])
-        if udalost.type == pohyb and not konec:
+        if udalost.type == pohyb and not konec and zacatek:
             pohni(mapa, seznam_na_ceste_s, "s")
             pohni(mapa, seznam_na_ceste_j, "j")
     
@@ -166,7 +168,7 @@ while True:
         sys.exit()
     
     okno.fill(pozadi)
-    if not konec:
+    if not konec and zacatek:
         oznac(mapa)
         prehod(mapa, seznam_vojaku_s, seznam_vojaku_j)
         brany(mapa)
@@ -180,6 +182,14 @@ while True:
         konec = True
     
     zobraz_mapu(mapa)
+    
+    if zacatek == False:
+        text_z = font_vyhry.render("Započni hru stiskem Mezeníku", True, bila)
+        misto_pro_text_z = text_z.get_rect(center=(rozliseni_x/2,rozliseni_y/2))
+        pygame.draw.rect(okno, cerna, (100,100,700,700))
+        okno.blit(text_z, misto_pro_text_z)
+        if stisk[pygame.K_SPACE]:
+            zacatek = True
     
     if konec:
         zobraz_mapu(mapa)
@@ -210,9 +220,11 @@ while True:
             for vez in mapa["veze_s"]:
                 vez["hp"] = 0
                 vez["vybrano"] = False
+            mapa["veze_s"][0]["vybrano"] = True
             for vez in mapa["veze_j"]:
                 vez["hp"] = 0
                 vez["vybrano"] = False
+            mapa["veze_j"][0]["vybrano"] = True
             for vyhybka in mapa["vyhybky_s"]:
                 vyhybka["stav"] = False
                 vyhybka["vybrano"] = False
@@ -221,6 +233,8 @@ while True:
                 vyhybka["stav"] = True
                 vyhybka["vybrano"] = False
             mapa["vyhybky_j"][0]["vybrano"] = True
+            aktivni_s = mapa["vyhybky_s"]
+            aktivni_j = mapa["vyhybky_j"]
         
     pygame.display.update()
     hodinky.tick(144)
