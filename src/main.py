@@ -193,7 +193,7 @@ while True:
     zobraz_mapu(mapa)
     
     if zacatek == False:
-        text_z = font_vyhry.render("Započni hru stiskem Mezeníku", True, bila)
+        text_z = font_vyhry.render("Započni hru stiskem Mezerníku", True, bila)
         misto_pro_text_z = text_z.get_rect(center=(rozliseni_x/2,rozliseni_y/2))
         pygame.draw.rect(okno, cerna, (100,100,700,700))
         okno.blit(text_z, misto_pro_text_z)
