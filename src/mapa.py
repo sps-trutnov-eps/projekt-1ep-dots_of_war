@@ -33,7 +33,7 @@ cesty = [
         ]
 
 veze_s = [
-    {"pozice":((abs(cesty[0][1][0] - cesty[0][2][0])/2) + cesty[0][1][0], (abs(cesty[0][1][1] - cesty[0][2][1])/2) + cesty[0][2][1]),"hrac":"s","hp":0,"vybrano":True}, #A
+    {"pozice":((abs(cesty[2][0][0] - cesty[2][1][0])/2) + cesty[2][0][0], (abs(cesty[2][1][1] - cesty[2][0][1])/2) + cesty[2][1][1]),"hrac":"s","hp":0,"vybrano":True}, #A
     {"pozice":((abs(cesty[6][1][0] - cesty[6][2][0])/2) + cesty[6][1][0], (abs(cesty[6][1][1] - cesty[6][2][1])/2) + cesty[6][2][1]),"hrac":"s","hp":0,"vybrano":False}, #G
     {"pozice":((abs(cesty[1][0][0] - cesty[1][2][0])/2) + cesty[1][0][0], (abs(cesty[1][0][1] - cesty[1][1][1])/2) + cesty[1][1][1]),"hrac":"s","hp":0,"vybrano":False}, #B
     {"pozice":((abs(cesty[8][0][0] - cesty[8][1][0])/2) + cesty[8][0][0], (abs(cesty[8][0][1] - cesty[8][2][1])/2) + cesty[8][2][1]),"hrac":"s","hp":0,"vybrano":False}, #R
@@ -43,7 +43,7 @@ veze_j = [
     {"pozice":((abs(cesty[13][0][0] - cesty[13][1][0])/2) + cesty[13][0][0], (abs(cesty[13][0][1] - cesty[13][2][1])/2) + cesty[13][2][1]),"hrac":"j","hp":0,"vybrano":True}, #M
     {"pozice":((abs(cesty[15][0][0] - cesty[15][2][0])/2) + cesty[15][0][0], (abs(cesty[15][0][1] - cesty[15][1][1])/2) + cesty[15][1][1]),"hrac":"j","hp":0,"vybrano":False}, #O
     {"pozice":((abs(cesty[10][0][0] - cesty[10][1][0])/2) + cesty[10][0][0], (abs(cesty[10][0][1] - cesty[10][1][1])/2) + cesty[10][1][1]),"hrac":"j","hp":0,"vybrano":False}, #J
-    {"pozice":((abs(cesty[17][1][0] - cesty[17][2][0])/2) + cesty[17][1][0], (abs(cesty[17][1][1] - cesty[17][2][1])/2) + cesty[17][2][1]),"hrac":"j","hp":0,"vybrano":False} #Q
+    {"pozice":((abs(cesty[16][0][0] - cesty[16][1][0])/2) + cesty[16][0][0], (abs(cesty[16][1][1] - cesty[16][0][1])/2) + cesty[16][1][1]),"hrac":"j","hp":0,"vybrano":False} #Q
          ]
 
 zakladna_s = {"body":(body[6], (body[4][0] + 0.5, body[4][1]), (body[11][0] + 0.5, body[11][1]), (body[12][0], body[12][1] + 0.5), (body[13][0], body[13][1] + 0.5)),"hrac":"s"}
