@@ -1,5 +1,3 @@
-import pygame
-import sys
 import random
 import math
 
@@ -251,7 +249,7 @@ def kontrola(mapa, seznam_vojaku_na_ceste, strana, seznam_nepratel, konec):
                             
 def utok_na_vez(mapa, seznam_vojaku, strana):
     if strana == "s":
-        for vojak in seznam_vojaku:
+        for vojak in seznam_vojaku[:]:
             for vez in mapa["veze_j"]:
                 if (abs(vez["pozice"][0] - vojak[0])**2 + abs(vez["pozice"][1] - vojak[1])**2) < 1/150:
                     if vez["hp"] == 0:
@@ -261,7 +259,7 @@ def utok_na_vez(mapa, seznam_vojaku, strana):
                         vez["hp"] -= 1
                     
     if strana == "j":
-        for vojak in seznam_vojaku:
+        for vojak in seznam_vojaku[:]:
             for vez in mapa["veze_s"]:
                 if (abs(vez["pozice"][0] - vojak[0])**2 + abs(vez["pozice"][1] - vojak[1])**2) < 1/150:
                     if vez["hp"] == 0:
@@ -271,8 +269,8 @@ def utok_na_vez(mapa, seznam_vojaku, strana):
                         vez["hp"] -= 1
                         
 def utok(seznam_vojaku, seznam_nepratel):
-    for vojak in seznam_vojaku:
-        for nepritel in seznam_nepratel:
+    for vojak in seznam_vojaku[:]:
+        for nepritel in seznam_nepratel[:]:
             if ((nepritel[0] - vojak[0])**2 + (nepritel[1] - vojak[1])**2) < 0.5/150:
                 seznam_vojaku.remove(vojak)
                 seznam_nepratel.remove(nepritel)

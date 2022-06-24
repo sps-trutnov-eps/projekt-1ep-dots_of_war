@@ -1,15 +1,24 @@
-import pygame
 import sys
-from map import mapa
+
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    DATA_ROOT = '.'
+else:
+    DATA_ROOT = '..'
+
+import pygame
+import os
+
+os.environ['SDL_VIDEO_CENTERED'] = '1'
+pygame.init()
+
+from mapa import mapa
 from ovladani import *
 from automatizace import *
 
 pozadi = 20,150,20
 rozliseni = rozliseni_x, rozliseni_y = 900, 900
 
-pygame.init()
-
-ikona = pygame.image.load("../data/Ikona.png")
+ikona = pygame.image.load(DATA_ROOT + "/data/Ikona.png")
 pygame.display.set_caption("Dots of War")
 okno = pygame.display.set_mode(rozliseni)
 pygame.display.set_icon(ikona)
@@ -184,7 +193,7 @@ while True:
     zobraz_mapu(mapa)
     
     if zacatek == False:
-        text_z = font_vyhry.render("Započni hru stiskem Mezeníku", True, bila)
+        text_z = font_vyhry.render("Započni hru stiskem Mezerníku", True, bila)
         misto_pro_text_z = text_z.get_rect(center=(rozliseni_x/2,rozliseni_y/2))
         pygame.draw.rect(okno, cerna, (100,100,700,700))
         okno.blit(text_z, misto_pro_text_z)

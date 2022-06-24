@@ -1,9 +1,9 @@
 # zkouska na vybirani objektu a presckavani mezi nimi
 import pygame
 import sys
-from map import mapa
+from mapa import mapa
 
-ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 800, 600
+ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 900, 900
 
 BARVA_POZADI = 0, 0, 0
 BARVA_OBJEKTU = 200, 30, 30
@@ -17,9 +17,6 @@ w2 = 18
 h2 = 30
 rozdil_ctverecku = 10
 
-pygame.init()
-
-pygame.display.set_caption('Dots of War - ovládání')
 okno = pygame.display.set_mode(ROZLISENI_OKNA)
 
 k_left = False
