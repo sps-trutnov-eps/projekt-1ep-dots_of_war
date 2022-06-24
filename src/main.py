@@ -103,10 +103,10 @@ def zobraz_mapu(mapa):
             
             if vez["hrac"] == "s":
                 okraj = 0,0,255
-                barva = 0,0,255
+                barva = (0,0,vez["hp"]*10)
             elif vez["hrac"] == "j":
                 okraj = 255,0,0
-                barva = 255,0,0
+                barva = (vez["hp"]*10,0,0)
                     
             if vez["hp"] <= 0:
                 barva = 0,0,0
