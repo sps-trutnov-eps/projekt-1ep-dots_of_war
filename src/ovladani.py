@@ -239,7 +239,11 @@ def brany(mapa):
     global povoleni_brany_j
     stisk = pygame.key.get_pressed()
     #Sever
-    if stisk[pygame.K_KP1]  and povoleni_brany_s:
+    if stisk[pygame.K_KP0] and povoleni_brany_s:
+        for x in mapa["brany_s"]:
+            x["stav"] = False
+    
+    if stisk[pygame.K_KP1] and povoleni_brany_s:
         povoleni_brany_s = False
         if mapa["brany_s"][0]["stav"] == True:
             for x in mapa["brany_s"]:
@@ -249,7 +253,7 @@ def brany(mapa):
                 x["stav"] = False
             mapa["brany_s"][0]["stav"] = True
 
-    if stisk[pygame.K_KP2]  and povoleni_brany_s:
+    if stisk[pygame.K_KP2] and povoleni_brany_s:
         povoleni_brany_s = False
         if mapa["brany_s"][1]["stav"] == True:
             for x in mapa["brany_s"]:
@@ -269,10 +273,14 @@ def brany(mapa):
                 x["stav"] = False
             mapa["brany_s"][2]["stav"] = True
     
-    if not stisk[pygame.K_KP1] and not stisk[pygame.K_KP2] and not stisk[pygame.K_KP3]:
+    if not stisk[pygame.K_KP1] and not stisk[pygame.K_KP2] and not stisk[pygame.K_KP3] and not sitsk[pygame.K_KP0]:
         povoleni_brany_s = True
     
     #Jih
+    if stisk[pygame.K_SEMICOLON] andpovoleni_brany_j:
+        for x in mapa["brany_j"]:
+                x["stav"] = False
+        
     if stisk[pygame.K_1] and povoleni_brany_j:
         povoleni_brany_j = False
         if mapa["brany_j"][0]["stav"] == True:
@@ -303,5 +311,5 @@ def brany(mapa):
                 x["stav"] = False
             mapa["brany_j"][2]["stav"] = True
             
-    if not stisk[pygame.K_1] and not stisk[pygame.K_2] and not stisk[pygame.K_3]:
+    if not stisk[pygame.K_1] and not stisk[pygame.K_2] and not stisk[pygame.K_3] and not stisk[pygame.K_SEMICOLON]:
         povoleni_brany_j = True
