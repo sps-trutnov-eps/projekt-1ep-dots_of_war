@@ -273,11 +273,11 @@ def brany(mapa):
                 x["stav"] = False
             mapa["brany_s"][2]["stav"] = True
     
-    if not stisk[pygame.K_KP1] and not stisk[pygame.K_KP2] and not stisk[pygame.K_KP3] and not sitsk[pygame.K_KP0]:
+    if not stisk[pygame.K_KP1] and not stisk[pygame.K_KP2] and not stisk[pygame.K_KP3] and not stisk[pygame.K_KP0]:
         povoleni_brany_s = True
     
     #Jih
-    if stisk[pygame.K_SEMICOLON] andpovoleni_brany_j:
+    if stisk[pygame.K_SEMICOLON] and povoleni_brany_j:
         for x in mapa["brany_j"]:
                 x["stav"] = False
         
