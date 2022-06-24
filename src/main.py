@@ -100,14 +100,18 @@ def zobraz_mapu(mapa):
             pozice_y = (vez["pozice"][1] * 150) - 10
             vyska = 20
             sirka = 12
+            
+            if vez["hrac"] == "s":
+                okraj = 0,0,255
+                barva = 0,0,255
+            elif vez["hrac"] == "j":
+                okraj = 255,0,0
+                barva = 255,0,0
+                    
             if vez["hp"] <= 0:
                 barva = 0,0,0
-            elif vez["hp"] > 0:
-                if vez["hrac"] == "s":
-                    barva = 0,0,255
-                elif vez["hrac"] == "j":
-                    barva = 255,0,0
-
+                
+            pygame.draw.rect(okno, okraj, (pozice_x-2, pozice_y-2, sirka+4, vyska+4))
             pygame.draw.rect(okno, barva, (pozice_x, pozice_y, sirka, vyska))
     
     body_s = []

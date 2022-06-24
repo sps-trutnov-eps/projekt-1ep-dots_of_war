@@ -13,8 +13,8 @@ CENA_VEZE = 15
 HP_VEZE = 25
 w = 50
 h = 50
-w2 = 18
-h2 = 30
+w2 = 22
+h2 = 34
 rozdil_ctverecku = 10
 
 okno = pygame.display.set_mode(ROZLISENI_OKNA)
@@ -170,7 +170,7 @@ def oznac(mapa):
         
         if aktivni_s == mapa["veze_s"]:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_OZNACENI_SEVER), ((objekt['pozice'][0] * 150) -9, (objekt['pozice'][1] * 150) - 15, w2, h2))
+                pygame.draw.rect(okno, (BARVA_OZNACENI_SEVER), ((objekt['pozice'][0] * 150) - w2/2, (objekt['pozice'][1] * 150) - h2/2, w2, h2))
                 
     for objekt in mapa["vyhybky_j"]:
         
@@ -182,7 +182,7 @@ def oznac(mapa):
         
         if aktivni_j == mapa["veze_j"]:
             if objekt['vybrano'] == True:
-                pygame.draw.rect(okno, (BARVA_OZNACENI_JIH), ((objekt['pozice'][0] * 150) -9, (objekt['pozice'][1] * 150) - 15, w2, h2))
+                pygame.draw.rect(okno, (BARVA_OZNACENI_JIH), ((objekt['pozice'][0] * 150) - w2/2, (objekt['pozice'][1] * 150) - h2/2, w2, h2))
                 
     return mapa
 
