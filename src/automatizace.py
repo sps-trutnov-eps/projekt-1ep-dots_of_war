@@ -272,5 +272,6 @@ def utok(seznam_vojaku, seznam_nepratel):
     for vojak in seznam_vojaku[:]:
         for nepritel in seznam_nepratel[:]:
             if ((nepritel[0] - vojak[0])**2 + (nepritel[1] - vojak[1])**2) < 0.5/150:
-                seznam_vojaku.remove(vojak)
-                seznam_nepratel.remove(nepritel)
+                if vojak in seznam_vojaku and nepritel in seznam_nepratel:
+                    seznam_vojaku.remove(vojak)
+                    seznam_nepratel.remove(nepritel)
