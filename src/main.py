@@ -1,3 +1,11 @@
+'''
+Dots of War
+
+Kombinace tower-defense a dota herních mechanismů. Vnikněte do základny protivníka a ubraňte svou!
+
+Projekt studentů 1. ročníku oboru elektronické počítačové systémy, jaro 2022
+'''
+
 import sys
 
 if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
